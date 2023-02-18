@@ -1,0 +1,104 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: poppins;
+    background: #FBFBFB;
+}
+
+nav {
+    background-color: #FDFDFD;
+}
+
+.sec {
+    padding: 13% 0px 5%;
+    height: 100%;
+}
+
+.project {
+    /* height: 100% !important; */
+}
+
+
+
+.project-img {
+    height: 180px;
+    width: 100%;
+}
+
+.project-img img {
+    background-color: #000;
+    height: 100%;
+    opacity: 0.5;
+    object-fit: cover;
+}
+
+
+
+.tag {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    /* background-color: rgba(0, 0, 255, 0.2); */
+}
+
+.tag span {
+    display: inline-block;
+    background-color: #eee;
+    /* border-radius: 0.25rem;
+    padding: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 600; */
+    text-transform: uppercase;
+    color: #333;
+}
+
+.project-img {
+    position: relative;
+}
+
+.project-img::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.project-img img {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.article{
+    margin:3% 6%
+}
+
+.article-img {
+    height: 230px;
+    width: 100%;
+}
+
+.article-img img {
+    height: 100%;
+    /* changed from width: 100% */
+    width: 100%;
+    object-fit: cover;
+}
+
+.article-content {
+    justify-content: center !important;
+    align-items: center !important;
+    height: 230px;
+    overflow: hidden;
+    /* added to prevent content from overflowing */
+}
