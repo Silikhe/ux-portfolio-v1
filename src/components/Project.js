@@ -18,10 +18,9 @@ export default function Project() {
         </div>
 
         <div class="text-left bg-white p-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-5">
-          <div class="flex justify-center">
-            <div class="block rounded-2 shadow-md bg-white max-w-lg item-center text ">
-              {/* <div class="py-3 px-6 border-b border-gray-300">Featured</div> */}
-              <div class="flex justify-between px-4 pt-4 bg-ray-100">
+          <a class="flex justify-center project">
+            <div class="block rounded-sm shadow-md bg-white max-w-lg item-center text hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer">
+              <div class="flex justify-between px-4 pt-4 bg-ray-100 relative">
                 <h5 class="py-3 px-3 text-xl font-bold text-gray-700 dark:text-white">
                   Essaytank website design{" "}
                 </h5>
@@ -30,8 +29,9 @@ export default function Project() {
                   id="dropdownButton"
                   data-dropdown-toggle="dropdownHover"
                   data-dropdown-trigger="hover"
-                  class="inline-block text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-1.5"
+                  className="inline-block drop-btn outline-none text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-1.5"
                   type="button"
+                  onClick={handleDropDown}
                 >
                   <span class="sr-only">Open dropdown</span>
                   <svg
@@ -44,10 +44,12 @@ export default function Project() {
                     <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z"></path>
                   </svg>
                 </button>
-                {/* <!-- Dropdown menu --> */}
+
                 <div
-                  id="dropdown"
-                  class="z-10 hidden text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700"
+                  // id="dropdown"
+                  className={`z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow right-14 absolute ${
+                    isOpen ? "block" : "hidden"
+                  }`}
                 >
                   <ul class="py-2" aria-labelledby="dropdownButton">
                     <li>
@@ -61,7 +63,7 @@ export default function Project() {
                     <li>
                       <a
                         href="#"
-                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white "
                       >
                         Export Data
                       </a>
@@ -76,7 +78,85 @@ export default function Project() {
                     </li>
                   </ul>
                 </div>
+
+                {/* <!-- Dropdown menu --> */}
+                {/* <div
+                  id="dropdown"
+                  className={`z-10 hidden text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 ${
+                    isOpen ? "block" : "hidden"
+                  }`}
+                >
+                  <ul class="py-2" aria-labelledby="dropdownButton">
+                    <li>
+                      <a
+                        href="#"
+                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                      >
+                        Edit
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        href="#"
+                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white "
+                      >
+                        Export Data
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        href="#"
+                        class="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                      >
+                        Delete
+                      </a>
+                    </li>
+                  </ul>
+                </div> */}
               </div>
+
+              {/* Working dropdown Menu */}
+              {/* <div className="dropdown">
+                <button
+                  className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center"
+                  onClick={handleDropDown}
+                >
+                  Steps
+                  <svg
+                    className="ml-2 w-4 h-4"
+                    aria-hidden="true"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M19 9l-7 7-7-7"
+                    ></path>
+                  </svg>
+                </button>
+
+                <div
+                  // id="dropdown"
+                  className={`z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow ${
+                    isOpen ? "block" : "hidden"
+                  }`}
+                >
+                  <ul className=" z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow ">
+                    <li>
+                      <a href="#" className="block py-2 px-4 hover:bg-gray-100">
+                        blablabla
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div> */}
+
+              {/* Ends Here */}
+
               <div>
                 <div class="px-6 pt-4 pb-0">
                   <span class="inline-block bg-gray-100 rounded-2 px-3 py-1 text-sm  text-gray-500 mr-2 mb-1">
@@ -132,7 +212,7 @@ export default function Project() {
                 </div>
               </div>
             </div>
-          </div>
+          </a>
           <div class="flex justify-center">
             <div class="block rounded-2 shadow-md bg-white max-w-lg item-center text ">
               {/* <div class="py-3 px-6 border-b border-gray-300">Featured</div> */}
@@ -558,45 +638,6 @@ export default function Project() {
               </div>
             </div>
           </div>
-          {/* Working dropdown Menu */}
-          {/* <div className="dropdown">
-            <button
-              className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center"
-              onClick={handleDropDown}
-            >
-              Steps
-              <svg
-                className="ml-2 w-4 h-4"
-                aria-hidden="true"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M19 9l-7 7-7-7"
-                ></path>
-              </svg>
-            </button>
-
-            <div
-              // id="dropdown"
-              className={`z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow ${
-                isOpen ? "block" : "hidden"
-              }`}
-            >
-              <ul className=" z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow ">
-                <li>
-                  <a href="#" className="block py-2 px-4 hover:bg-gray-100">
-                    blablabla
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </div> */}
 
           <div class="w-full max-w-lg bg-white border rounded-2 shadow dark:bg-gray-800 dark:border-gray-700">
             <div class="flex justify-between px-4 pt-4 bg-ray-100">

@@ -13,7 +13,7 @@ body {
 /* Navbar */
 
 .logo:hover {
-    color: rgb(225, 35, 36);
+    color: rgba(225, 35, 36);
 }
 
 .transition-colors:hover {
@@ -25,6 +25,12 @@ nav {
 }
 
 /* Hero */
+
+.resume:hover, .resume p:hover {
+    color: #e12324;
+}
+
+/* Projects Section */
 .sec {
     padding: 13% 0px 5%;
     height: 100%;
@@ -34,6 +40,14 @@ nav {
     /* height: 100% !important; */
 }
 
+.drop-btn:hover {
+    color: rgb(225, 35, 36);
+
+}
+
+.project-card:hover {
+    background: rgb(225, 35, 36) !important;
+}
 
 
 .project-img {

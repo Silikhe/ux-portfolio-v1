@@ -39,7 +39,11 @@ export default function Hero() {
                   Product Designer
                 </p>
               </div>
-              <a href="https://example.com/my-resume.pdf" download>
+              <a
+                href="https://example.com/my-resume.pdf"
+                download
+                className="resume"
+              >
                 <div className="flex items-center">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"

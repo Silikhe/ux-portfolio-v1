@@ -9,7 +9,7 @@ export default function Case() {
     return `rgba(${r}, ${g}, ${b}, ${alpha})`;
   }
 
-  const mainColor = "#008000";
+  const mainColor = "#e12324";
   let opacity1 = hexToRgba(mainColor, 0.1);
   let opacity5 = hexToRgba(mainColor, 0.5);
 
@@ -285,19 +285,19 @@ export default function Case() {
                     />
                   </div>
                 </div>
-                <div class="w-full mb-4 border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-700 dark:border-gray-600">
+                <div class="w-full mb-4 border border-gray-200 rounded-sm bg-gray-50 dark:bg-gray-700 dark:border-gray-600">
                   <div class="flex items-center justify-between px-3 py-2 border-b dark:border-gray-600">
                     <p className="text-sm">Type your Feedback</p>
                   </div>
-                  <div class="px-4 py-2 bg-white rounded-b-lg dark:bg-gray-800">
+                  <div class="px-4 py-2 bg-white rounded-sm dark:bg-gray-800">
                     <label for="editor" class="sr-only">
                       Publish post
                     </label>
                     <textarea
                       id="editor"
                       rows="4"
-                      class="block w-full px-0 text-sm text-gray-800 bg-white border-0 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400"
-                      placeholder="Write an article..."
+                      className="block w-full px-0 text-sm text-gray-800 bg-white border-0 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400"
+                      placeholder="Write an message..."
                       required
                     ></textarea>
                   </div>
@@ -518,90 +518,7 @@ export default function Case() {
 
             </div>
           </div>
-          <div class="flex justify-center">
-            <div class="block rounded-2 shadow-md bg-white max-w-lg item-center text ">
-              {/* <div class="py-3 px-6 border-b border-gray-300">Featured</div> */}
-              <div class="flex justify-between px-4 pt-4 bg-ray-100">
-                <h5 className="font-bold text-2xl mb-2 text-gray-800 sm:text-sm">
-                  Understanding the company okayy
-                </h5>
-              </div>
-
-              <div>
-                <div
-                  class="flex px-5 py-2 pt-1 pb-2"
-                  style={{
-                    display: "flex",
-                    // justifyContent: "center",
-                    // alignItems: "center",
-                  }}
-                >
-                  <span
-                    class="inline-flex items-center justify-center px-2 py-0 mr-2 text-xs font-medium text-gray-700 bg-gray-100 dark:bg-gray-700 dark:text-gray-400"
-                    style={{
-                      backgroundColor: `${opacity1}`,
-                      opacity: "",
-                      transition: "opacity 0.3s",
-                    }}
-                  >
-                    UX Design
-                  </span>
-                  <span
-                    class="inline-flex items-center justify-center px-2 py-0 mr-2 text-xs font-medium text-gray-700 bg-gray-100 dark:bg-gray-700 dark:text-gray-400"
-                    style={{
-                      backgroundColor: `${opacity1}`,
-                      opacity: "",
-                      transition: "opacity 0.3s",
-                    }}
-                  >
-                    UX Design
-                  </span>
-                  <span
-                    class="inline-flex items-center justify-center px-2 py-0 mr-2 text-xs font-medium text-gray-700 bg-gray-100 dark:bg-gray-700 dark:text-gray-400"
-                    style={{
-                      backgroundColor: `${opacity1}`,
-                      opacity: "",
-                      transition: "opacity 0.3s",
-                    }}
-                  >
-                    UX Design
-                  </span>
-                </div>
-              </div>
-              <div class="px-5">
-                <p class="text-gray-500 text-sm mb-4 truncate- p-case">
-                  As the lead UX designer for EssayTank at Wiggle Technology, I
-                  created a fun and user-friendly platform that streamlined
-                  academic writing with interactive prompts, easy adoption and
-                  retention, and key features like plagiarism detection and live
-                  feedback.{" "}
-                </p>
-              </div>
-              <div class="flex  justify-between py-3 px-6 border-t border-gray-300 text-gray-600">
-                <div
-                  className="flex kk bg-gray-100 rounded-2 px-3 py-1"
-                  style={{
-                    color: `${mainColor}`,
-                    backgroundColor: `${opacity1}`,
-                    opacity: "",
-                    transition: "opacity 0.3s",
-                  }}
-                >
-                  <p className="text-sm pr-2">Next Case Study</p>
-                  <svg
-                    class="w-4 h-4 dark:text-gray-500 group-hover:text-blue-600 dark:group-hover:text-blue-500"
-                    aria-hidden="true"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg"
-                    transform="rotate(45)"
-                  >
-                    <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z"></path>
-                  </svg>
-                </div>
-              </div>
-            </div>
-          </div>
+          
         </div>
       </div>
     </div>
