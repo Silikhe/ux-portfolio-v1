@@ -188,10 +188,22 @@ export default function Case() {
                 <h5 className=" text-xl mb-2 text-black sm:text-sm">
                   Tools Used
                 </h5>{" "}
-                <div class="flex flex-row items-center flex-wrap">
-                  <div class="mr-3 text-center flex-shrink-0">
+                <div class="flex flex-row items-center flex-wrap ">
+                  <div class="mr-3 text-center flex-shrink-0 mb-1">
                     <img
-                      class="w-12 p-2 h-12 shadow-sm"
+                      class="w-12 p-2 h-12 mb-1 shadow-sm object-cover"
+                      src="https://w7.pngwing.com/pngs/911/515/png-transparent-figma-logo-brand-logos-brands-in-colors-icon-thumbnail.png"
+                      alt="Silikhe image"
+                      style={{
+                        color: `${mainColor}`,
+                        backgroundColor: `${opacity1}`,
+                      }}
+                    />
+                    <h5 className="text-sm mb-1 text-gray-600">Miro</h5>
+                  </div>
+                  <div class="mr-3 text-center flex-shrink-0 mb-1">
+                    <img
+                      class="w-12 p-2 h-12 mb-1 shadow-sm"
                       src="https://seeklogo.com/images/M/miro-logo-4F00416377-seeklogo.com.png"
                       alt="Silikhe image"
                       style={{
@@ -199,29 +211,33 @@ export default function Case() {
                         backgroundColor: `${opacity1}`,
                       }}
                     />
-                    <h5
-                      className="text-sm mb-1 underline"
-                      style={{
-                        color: `${mainColor}`,
-                      }}
-                    >
-                      Miro
-                    </h5>
+                    <h5 className="text-sm mb-1 text-gray-600">Miro</h5>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div class="flex justify-between m-7 pb-8">
-          <div class="flex text-center items-center g-gray-900  mr-4">
-            <h1 className="text-bold">1</h1>
+       
+
+        <div class="flex justify-around m-7 my-7  pb-8  border-b border-gray-300">
+          <div class="flex text-center items-center   mr-4">
+            <div className="justify-center text-center w-full items-center">
+              <h1 className="text-bold text-gray-800 text-5xl">1</h1>
+              <h5 className="text-nomarl mb-1 text-gray-600">Product Manager</h5>
+            </div>
           </div>
-          <div class="flex items-center g-gray-900  mr-4">
-            <h1 className="text-bold">1</h1>
+          <div class="flex text-center items-center   mr-4">
+            <div className="justify-center items-center">
+              <h1 className="text-bold text-gray-800 text-5xl">1</h1>
+              <h5 className="text-sm mb-1 text-gray-600">Product Designer</h5>
+            </div>
           </div>
-          <div class="flex items-center g-gray-900  mr-4">
-            <h1 className="text-bold">1</h1>
+          <div class="flex text-center items-center   mr-4">
+            <div className="justify-center items-center">
+              <h1 className="text-bold text-gray-800 text-5xl">4</h1>
+              <h5 className="text-sm mb-1 text-gray-600">Software Developer</h5>
+            </div>
           </div>
         </div>
         <div className="text-center m-10  inset-0 bg-lightblue ">
