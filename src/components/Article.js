@@ -2,12 +2,12 @@ import React from "react";
 
 export default function Article() {
   return (
-    <div className="r pt-9">
+    <div className="r pt-8">
       <div className="text-center">
         <div class="font-bold text-xl text-cente mb-2 text-gray-800">
-        UX Gems:{" "}
+          UX Gems:{" "}
           <span className="text-gray-500 text-center">
-          My Top Featured Events
+            My Top Featured Events
           </span>
         </div>
       </div>

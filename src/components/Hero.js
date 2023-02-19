@@ -7,7 +7,7 @@ export default function Hero() {
         <h1 className="mb-4 font-bold leading-none tracking-tight text-gray-900 md:text-3xl lg:text-4xl dark:text-white">
           Pixel Perfect, User-Centric Design Maverick!{" "}
         </h1>
-        <p className="mb-4 text-sm font-normal text-gray-500 lg:text-lg sm:px-14 xl:px-44 dark:text-gray-400 pt-4 pb-4">
+        <p className="mb-4 text-sm font-normal text-gray-500 lg:text-lg sm:px-14 xl:px-44 dark:text-gray-400 pt-4 pb-4 sm: p-5">
           Breaking boundaries and pushing the limits of what's possible in the
           world of UI/UX design is my ultimate passion! Let's ditch the boring
           status quo and co-create intuitive, user-centric interfaces that spark
@@ -16,7 +16,7 @@ export default function Hero() {
           truly stand out.
         </p>
         <div className="flex justify-center items-center ">
-          <div className=" flex justify-center items-center ">
+          <div className=" flex justify-center items-center w-full ">
             <div className="per-img pr-3">
               <img
                 className="w-16 h-16 p-1 rounded-2 ring-1 ring-gray-200 dark:ring-gray-400"

@@ -523,7 +523,7 @@ export default function Project() {
                 </div>
               </div>
               <div class="p-6">
-                <p class="text-gray-500 text-base mb-2">Comming Soon!</p>
+                <p class="text-gray-500 text-base mb-2">Comming Soon!Stay tuned. come check next time</p>
               </div>
               <div class=" justify-between pb-5 py-3 px-6 border-t border-gray-300 text-gray-600">
                 <div class="flex justify-between mb-1">
@@ -585,8 +585,6 @@ export default function Project() {
 
           <div class="w-full max-w-lg bg-white border rounded-2 shadow dark:bg-gray-800 dark:border-gray-700">
             <div class="flex justify-between px-4 pt-4 bg-ray-100">
- 
-
               <button
                 id="dropdownButton"
                 data-dropdown-toggle="dropdownHover"
@@ -596,7 +594,6 @@ export default function Project() {
                 disab
               >
                 <span class="sr-only">Open dropdown</span>
-                
               </button>
               {/* <!-- Dropdown menu --> */}
               <div

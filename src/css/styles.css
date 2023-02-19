@@ -79,8 +79,8 @@ nav {
     object-fit: cover;
 }
 
-.article{
-    margin:3% 6%
+.article {
+    margin: 3% 30%
 }
 
 .article-img {
@@ -102,3 +102,19 @@ nav {
     overflow: hidden;
     /* added to prevent content from overflowing */
 }
+
+
+/* Case Study */
+
+@media (min-width: 768px) {
+    /* Only show the container on screens larger than 768px */
+    .hidden {
+      display: none;
+    }
+    
+    /* Style the container to display the images side by side */
+    .flex-row {
+      flex-direction: row;
+    }
+  }
+  
