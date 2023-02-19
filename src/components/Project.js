@@ -1,22 +1,59 @@
 import React, { useState } from "react";
+import { Helmet } from "react-helmet";
 
 export default function Project() {
   const [isOpen, setOpen] = useState(false);
   const mainColor = "rgb(225, 35, 36)";
   let opacity1 = "rgba(225, 35, 36, .1)";
+  const url = window.location.href;
 
   const handleDropDown = () => {
     setOpen(!isOpen);
   };
 
+  const shareOnLinkedIn = () => {
+    const postTitle = "My awesome post";
+    const postSummary = "Check out my latest post";
+    const imageUrl = "https://example.com/image.jpg"; // replace with the URL of your image
+    const linkedinUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(
+      url
+    )}&title=${encodeURIComponent(postTitle)}&summary=${encodeURIComponent(
+      postSummary
+    )}&source=LinkedIn&mini=true&ro=true&ir=true&media=${imageUrl}`;
+    window.open(linkedinUrl);
+  };
+
+  const shareOnTwitter = () => {
+    const tweetText =
+      "Feeling stuck in a design rut? Check out @silikhesilas's fresh and bold portfolio! 🔥 Their case studies will take your UI/UX game to the next level. Share this secret weapon and let's take over the design world! 🚀 #designinspiration #uiux #portfoliogoals";
+    const imageUrl =
+      "https://cdn.dribbble.com/userupload/4173060/file/original-c4631c707d399a30ca45327f09e036e5.png?compress=1&resize=1024x768"; // replace with the URL of your image
+    const tweetUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(
+      url
+    )}&text=${encodeURIComponent(
+      tweetText
+    )}&amp;via=yourTwitterHandle&amp;hashtags=example,hashtag&amp;media=${imageUrl}`;
+
+    window.open(tweetUrl);
+  };
+
   return (
     <div className="">
+      <button onClick={shareOnLinkedIn}>Share on LinkedIn</button>
+
       <div class="bg-white text-center pt-9">
         <div class="font-bold text-xl mb-2 text-gray-800">
           Featured UX Adventures:{" "}
           <span className="text-gray-500">Tales of Delightful Design</span>
         </div>
-
+        <button onClick={shareOnTwitter}>Share on Twitter</button>
+        <Helmet>
+          <script
+            async
+            src="https://platform.twitter.com/widgets.js"
+            charSet="utf-8"
+          />
+        </Helmet>
         <div class="text-left bg-white p-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-5">
           <a class="flex justify-center project">
             <div class="block rounded-sm shadow-md bg-white max-w-lg item-center text hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer">
@@ -54,26 +91,28 @@ export default function Project() {
                   <ul class="py-2" aria-labelledby="dropdownButton">
                     <li>
                       <a
-                        href="#"
+                        onClick={shareOnTwitter}
                         class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
                       >
-                        Edit
+                        Share on Twitter
                       </a>
                     </li>
                     <li>
                       <a
                         href="#"
+                        onClick={shareOnLinkedIn}
                         class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white "
                       >
-                        Export Data
+                        Share on Twitter
                       </a>
                     </li>
                     <li>
                       <a
                         href="#"
-                        class="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                        onClick={closeDropdown}
+                        className="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
                       >
-                        Delete
+                        Close
                       </a>
                     </li>
                   </ul>
