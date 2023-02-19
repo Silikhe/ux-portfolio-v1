@@ -523,7 +523,9 @@ export default function Project() {
                 </div>
               </div>
               <div class="p-6">
-                <p class="text-gray-500 text-base mb-2">Comming Soon!Stay tuned. come check next time</p>
+                <p class="text-gray-500 text-base mb-2">
+                  Comming Soon!Stay tuned. come check next time
+                </p>
               </div>
               <div class=" justify-between pb-5 py-3 px-6 border-t border-gray-300 text-gray-600">
                 <div class="flex justify-between mb-1">

@@ -107,14 +107,26 @@ nav {
 /* Case Study */
 
 @media (min-width: 768px) {
+
     /* Only show the container on screens larger than 768px */
     .hidden {
-      display: none;
+        display: none;
     }
-    
+
     /* Style the container to display the images side by side */
     .flex-row {
-      flex-direction: row;
+        flex-direction: row;
     }
-  }
-  
+}
+
+.p-case {
+    display: -webkit-box;
+    max-width: 100%;
+    /* -webkit-line-clamp: 2; */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.kk:hover {
+    opacity: 1;
+}
