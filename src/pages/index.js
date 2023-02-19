@@ -3,18 +3,18 @@ import Article from "../components/Article";
 import Case from "../components/Case";
 import Footer from "../components/Footer";
 import Hero from "../components/Hero";
+import Layout from "../components/Layout";
 import Navbar from "../components/Navbar";
 import Project from "../components/Project";
 
 const IndexPage = () => {
   return (
     <div className="">
-      <Navbar />
-      <Hero/>
-      <Project/>
-      <Article/>
-      <Footer/>
-      <Case/>
+      <Layout>
+        <Hero />
+        <Project />
+        <Article />
+      </Layout>
     </div>
   );
 };

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from 'gatsby'
 
 export default function Navbar() {
   const [isCopied, setIsCopied] = useState(false);
@@ -35,6 +36,8 @@ export default function Navbar() {
         <div className="flex-shrink-0 container flex flex-wrap items-center justify-between mx-auto">
           <a href="/" className="flex items-center ">
             <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white logo">
+            <Link to="/about">About</Link>
+
               Silikhe_
             </span>
           </a>
@@ -84,6 +87,7 @@ export default function Navbar() {
           >
             <ul class="flex flex-col p-4 mt-4 border border-gray-100 rounded-sm  md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 ">
               <li>
+              {/* <Link to="/case"/> */}
                 <a
                   href="#"
                   class="block py-2 pl-3 pr-4 text-white rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white"

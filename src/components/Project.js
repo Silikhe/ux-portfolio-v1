@@ -3,6 +3,7 @@ import { Helmet } from "react-helmet";
 
 export default function Project() {
   const [isOpen, setOpen] = useState(false);
+
   const mainColor = "rgb(225, 35, 36)";
   let opacity1 = "rgba(225, 35, 36, .1)";
   const url = window.location.href;
@@ -10,6 +11,9 @@ export default function Project() {
   const handleDropDown = () => {
     setOpen(!isOpen);
   };
+  // const closeDropdown = () => {
+  //   setIsOpen(false);
+  // };
 
   const shareOnLinkedIn = () => {
     const postTitle = "My awesome post";
@@ -59,7 +63,7 @@ export default function Project() {
             <div class="block rounded-sm shadow-md bg-white max-w-lg item-center text hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer">
               <div class="flex justify-between px-4 pt-4 bg-ray-100 relative">
                 <h5 class="py-3 px-3 text-xl font-bold text-gray-700 dark:text-white">
-                  Essaytank website design{" "}
+                  Main Project Title{" "}
                 </h5>
 
                 <button
@@ -108,8 +112,7 @@ export default function Project() {
                     </li>
                     <li>
                       <a
-                        href="#"
-                        onClick={closeDropdown}
+                        onClick={handleDropDown}
                         className="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
                       >
                         Close
@@ -117,85 +120,7 @@ export default function Project() {
                     </li>
                   </ul>
                 </div>
-
-                {/* <!-- Dropdown menu --> */}
-                {/* <div
-                  id="dropdown"
-                  className={`z-10 hidden text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 ${
-                    isOpen ? "block" : "hidden"
-                  }`}
-                >
-                  <ul class="py-2" aria-labelledby="dropdownButton">
-                    <li>
-                      <a
-                        href="#"
-                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                      >
-                        Edit
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        href="#"
-                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white "
-                      >
-                        Export Data
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        href="#"
-                        class="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                      >
-                        Delete
-                      </a>
-                    </li>
-                  </ul>
-                </div> */}
               </div>
-
-              {/* Working dropdown Menu */}
-              {/* <div className="dropdown">
-                <button
-                  className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 text-center inline-flex items-center"
-                  onClick={handleDropDown}
-                >
-                  Steps
-                  <svg
-                    className="ml-2 w-4 h-4"
-                    aria-hidden="true"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M19 9l-7 7-7-7"
-                    ></path>
-                  </svg>
-                </button>
-
-                <div
-                  // id="dropdown"
-                  className={`z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow ${
-                    isOpen ? "block" : "hidden"
-                  }`}
-                >
-                  <ul className=" z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow ">
-                    <li>
-                      <a href="#" className="block py-2 px-4 hover:bg-gray-100">
-                        blablabla
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-              </div> */}
-
-              {/* Ends Here */}
-
               <div>
                 <div class="px-6 pt-4 pb-0">
                   <span class="inline-block bg-gray-100 rounded-2 px-3 py-1 text-sm  text-gray-500 mr-2 mb-1">
@@ -267,7 +192,6 @@ export default function Project() {
                   class="inline-block text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-1.5"
                   type="button"
                 >
-                  <span class="sr-only">Open dropdown</span>
                   <svg
                     class="w-6 h-6"
                     aria-hidden="true"
@@ -661,6 +585,31 @@ export default function Project() {
               </div>
               <div class=" justify-between pb-5 py-3 px-6 border-t border-gray-300 text-gray-600">
                 <div class="flex justify-between mb-1">
+                  <span
+                    class="gray-500 truncate dark:text-gray-400 dark:text-white"
+                    style={{ color: `${mainColor}` }}
+                  >
+                    Research
+                  </span>
+                  <span
+                    class="gray-500 truncate dark:text-gray-400 dark:text-white"
+                    style={{ color: `${mainColor}` }}
+                  >
+                    80%
+                  </span>
+                </div>
+                <div
+                  class="w-full rounded-sm h-2.0 dark:bg-gray-700"
+                  style={{ backgroundColor: `${opacity1}` }}
+                >
+                  <div
+                    class="bg-blue-600 h-2.5 rounded-sm"
+                    style={{ width: `80%`, backgroundColor: `${mainColor}` }}
+                  ></div>
+                </div>
+              </div>
+              {/* <div class=" justify-between pb-5 py-3 px-6 border-t border-gray-300 text-gray-600">
+                <div class="flex justify-between mb-1">
                   <span class="text-base font-medium text-blue-700 dark:text-white">
                     Progress
                   </span>
@@ -674,7 +623,7 @@ export default function Project() {
                     style={{ width: "45%" }}
                   ></div>
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
 
@@ -831,12 +780,39 @@ export default function Project() {
                 </a>
               </div>
               <div class="flex mt-4 space-x-3 md:mt-6">
-                <a
+                {/* <a
                   href="#"
                   class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-2 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                 >
                   Download Resume
-                </a>
+                </a> */}
+                <div class="flex  justify-between  ">
+                  <div
+                    className="flex kk bg-gray-100 rounded-2 px-3 py-2"
+                    style={{
+                      color: `${mainColor}`,
+                      backgroundColor: `${opacity1}`,
+                      opacity: "",
+                      transition: "opacity 0.3s",
+                    }}
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 26 26"
+                      stroke-width="1.5"
+                      stroke="currentColor"
+                      class="w-5 h-5"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m.75 12l3 3m0 0l3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"
+                      />
+                    </svg>
+                    <p className="text-sm pl-2">View Case Study</p>
+                  </div>
+                </div>
                 <a
                   href="#"
                   class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-gray-900 bg-white border border-gray-300 rounded-2 hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-700 dark:focus:ring-gray-700"

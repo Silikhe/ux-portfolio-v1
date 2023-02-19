@@ -2,7 +2,7 @@ import React from "react";
 
 export default function Article() {
   return (
-    <div className="r pt-8">
+    <div className="w-full py-8 ">
       <div className="text-center">
         <div class="font-bold text-xl text-cente mb-2 text-gray-800">
           UX Gems:{" "}
@@ -11,7 +11,7 @@ export default function Article() {
           </span>
         </div>
       </div>
-      <div className="pt-5 article grid grid-cols-1 sm:grid-cols-1 md:grid-cols-4 bg-gray-100 lg:grid-cols-4 xl:grid-cols-4 gap-0">
+      <div className="my-5 mx-20 article grid grid-cols-1 sm:grid-cols-1 md:grid-cols-4 bg-gray-100 lg:grid-cols-4 xl:grid-cols-4 gap-0">
         <div class="max-w-sm">
           <div>
             <ul className="mx-5 divide-y  border-b border-gray-300">
