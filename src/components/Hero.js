@@ -41,16 +41,21 @@ export default function Hero() {
               </div>
               <a href="https://example.com/my-resume.pdf" download>
                 <div className="flex items-center">
-                  <img
-                    alt="Download icon"
-                    src="https://img.icons8.com/ios-glyphs/256/parse-from-clipboard.png"
-                    style={{
-                      width: "17px",
-                      height: "17px",
-                      filter:
-                        "brightness(0) saturate(100%) hue-rotate(10deg) invert(28%) sepia(95%) saturate(7297%) hue-rotate(333deg) brightness(94%) contrast(86%)",
-                    }}
-                  />
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 26 26"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    class="w-5 h-5"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m.75 12l3 3m0 0l3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"
+                    />
+                  </svg>
+
                   {/* <svg
                     aria-hidden="true"
                     class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"

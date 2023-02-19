@@ -34,13 +34,18 @@ export default function Navbar() {
       >
         <div className="flex-shrink-0 container flex flex-wrap items-center justify-between mx-auto">
           <a href="/" className="flex items-center ">
-            <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">
+            <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white logo">
               Silikhe_
             </span>
           </a>
           <div className="flex md:order-2">
             <span
-              className="bg-purple-100 text-purple-800 text-sm font-medium mr-3 px-3.5 py-1.5 rounded dark:bg-gray-700 dark:text-purple-400 border border-purple-400 outline-none hidden sm:block"
+              className=" text-sm font-medium mr-3 px-3.5 py-1.5 rounded-sm dark:bg-gray-700 dark:text-purple-400  outline-none hidden sm:block"
+              style={{
+                backgroundColor: `rgba(225, 35, 36, 0.1)`,
+                color: `rgba(225, 35, 36, .8)`,
+                border: `.5px solid rgba(225, 35, 36, 1)`,
+              }}
               onClick={() => {
                 navigator.clipboard.writeText("silikhesilas@gmail.com");
                 alert("Email address copied to clipboard!");
@@ -77,11 +82,12 @@ export default function Navbar() {
             class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1"
             id="navbar-sticky"
           >
-            <ul class="flex flex-col p-4 mt-4 border border-gray-100 rounded-lg  md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 ">
+            <ul class="flex flex-col p-4 mt-4 border border-gray-100 rounded-sm  md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 ">
               <li>
                 <a
                   href="#"
-                  class="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white"
+                  class="block py-2 pl-3 pr-4 text-white rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white"
+                  style={{ color: `rgba(225, 35, 36, 1)` }}
                   aria-current="page"
                 >
                   HOME
@@ -90,15 +96,15 @@ export default function Navbar() {
               <li>
                 <a
                   href="#"
-                  class="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                  class="block py-2 pl-3 pr-4 text-gray-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700 transition-colors"
                 >
                   ABOUT
                 </a>
               </li>
               <li>
-                <a
+              <a
                   href="#"
-                  class="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                  class="block py-2 pl-3 pr-4 text-gray-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700 transition-colors"
                 >
                   CASE STUDY
                 </a>

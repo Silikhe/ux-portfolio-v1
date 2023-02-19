@@ -10,10 +10,21 @@ body {
     background: #FBFBFB;
 }
 
+/* Navbar */
+
+.logo:hover {
+    color: rgb(225, 35, 36);
+}
+
+.transition-colors:hover {
+    color: rgb(225, 35, 36);
+}
+
 nav {
     background-color: #FDFDFD;
 }
 
+/* Hero */
 .sec {
     padding: 13% 0px 5%;
     height: 100%;

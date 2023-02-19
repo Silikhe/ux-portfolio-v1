@@ -2,10 +2,13 @@ import React, { useState } from "react";
 
 export default function Project() {
   const [isOpen, setOpen] = useState(false);
+  const mainColor = "rgb(225, 35, 36)";
+  let opacity1 = "rgba(225, 35, 36, .1)";
 
   const handleDropDown = () => {
     setOpen(!isOpen);
   };
+
   return (
     <div className="">
       <div class="bg-white text-center pt-9">
@@ -104,18 +107,28 @@ export default function Project() {
               </div>
               <div class="flex justify-between py-3 px-6 border-t border-gray-300 text-gray-600">
                 <p className="">2020</p>
-                <div className="flex">
-                  <span class="mr-2">Explore</span>
-                  <svg
-                    class="w-4 h-4 text-gray-400 dark:text-gray-500 group-hover:text-blue-600 dark:group-hover:text-blue-500"
-                    aria-hidden="true"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg"
-                    transform="rotate(45)"
+                <div class="flex  justify-between  ">
+                  <div
+                    className="flex kk bg-gray-100 rounded-2 px-3 py-2"
+                    style={{
+                      color: `${mainColor}`,
+                      backgroundColor: `${opacity1}`,
+                      opacity: "",
+                      transition: "opacity 0.3s",
+                    }}
                   >
-                    <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z"></path>
-                  </svg>
+                    <p className="text-sm pr-2">View Case Study</p>
+                    <svg
+                      class="w-4 h-4 dark:text-gray-500 group-hover:text-blue-600 dark:group-hover:text-blue-500"
+                      aria-hidden="true"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                      xmlns="http://www.w3.org/2000/svg"
+                      transform="rotate(45)"
+                    >
+                      <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z"></path>
+                    </svg>
+                  </div>
                 </div>
               </div>
             </div>
