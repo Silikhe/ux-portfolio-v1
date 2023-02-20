@@ -130,7 +130,7 @@ export default function Case() {
                 </p>
               </div>
               <div className="my-2">
-                <h5 className="text-gray-800 mb-1 ">Challenges</h5>
+                <h5 className="text-gray-800 mb-1 ">Design Challenges</h5>
                 <p class="text-gray-500 text-base mb-4">
                   I was hired as the only designer on the team, working under
                   the product team, while also assisting in marketing design
