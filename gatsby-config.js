@@ -8,7 +8,22 @@ require("dotenv").config({
 const strapiConfig = {
   apiURL: process.env.STRAPI_API_URL,
   accessToken: process.env.STRAPI_TOKEN,
-  collectionTypes: ["cases"],
+  collectionTypes: [
+    {
+      singularName: "case",
+      queryParams: {
+        publicationState:
+          process.env.GATSBY_IS_PREVIEW === "true" ? "preview" : "live",
+        populate: {
+          category: { populate: "*" },
+          cover: "*",
+          blocks: {
+            populate: "*",
+          },
+        },
+      },
+    },
+  ],
   singleTypes: [],
   remoteFileHeaders: {
     /**

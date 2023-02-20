@@ -4,7 +4,7 @@ import confetti from "canvas-confetti";
 
 export default function Case() {
   function launchConfetti() {
-    let duration = 15 * 1000;
+    let duration = 7 * 1000;
     let animationEnd = Date.now() + duration;
     let defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
 
@@ -49,9 +49,39 @@ export default function Case() {
 
   return (
     <div
-      className="bg-grey-200 dark:bg-gray-900 py-2 my-5 mx"
+      className="bg-grey-200 dark:bg-gray-900 relative h-screen py-2 my-5 mx"
       style={{ background: `${opacity1}` }}
     >
+      <div class="flex justify-center fixed z-20 mx-auto bottom-5 py-3 px-6 border-gray-300 text-gray-600">
+        <div class="item-center  ">
+          <div
+            onClick={launchConfetti}
+            className="flex kk bg-gray-100 mt-3 text-center shadow rounded-2 px-3 py-2"
+            style={{
+              color: `white`,
+              backgroundColor: `${mainColor}`,
+              opacity: "",
+              transition: "opacity 0.3s",
+            }}
+          >
+            <p className="text-sm pr-2">Appreciate Case Study</p>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="w-6 h-6"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"
+              />
+            </svg>
+          </div>
+        </div>
+      </div>
       <div className="bg-white mx-10 my-7">
         <div
           className="m-7  rounded-sm flex items-center justify-center flex-col min-h- w-70  text-white py-8 md:py-20 transition-all duration-300 cursor-pointer filter grayscale hover:grayscale-0"
@@ -276,22 +306,6 @@ export default function Case() {
         </div>
         <div className="text-center flex-wrap m-7 pb-8  ">
           <h1 className="text-5xl font-bold p-10">Case Study</h1>
-          <div
-            className="flex justify-center  bg-gray-100 rounded-sm cursor-pointer px-3 py-3"
-            onClick={launchConfetti}
-            style={{
-              color: `${mainColor}`,
-              backgroundColor: `${opacity1}`,
-              opacity: "",
-              transition: "opacity 0.3s",
-            }}
-          >
-            <p className="text-sm pr-2">Apreciate Project</p>
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
-</svg>
-
-          </div>
         </div>
       </div>
       <div className="text-center mx-9 mb-2  bg-white">
@@ -535,11 +549,11 @@ export default function Case() {
 
               <div class="py-3">
                 <p class="text-gray-500 text-sm pb-4  p-case border-b border-gray-300 text-gray-600">
-                  As the lead UX designer for EssayTank at Wiggle Technology, I
-                  created a fun and user-friendly platform that streamlined
-                  academic writing with interactive prompts, easy adoption and
-                  retention, and key features like plagiarism detection and live
-                  feedback.{" "}
+                  Growing up in Nairobi, I was deeply inspired by my mother's
+                  salesmanship and my father's carpentry skills. My mother's
+                  ability to sell through effective communication and my
+                  father's attention to detail and high-quality craftsmanship
+                  sparked my{" "}
                 </p>
               </div>
 
@@ -552,7 +566,7 @@ export default function Case() {
                   transition: "opacity 0.3s",
                 }}
               >
-                <p className="text-sm pr-2">Leave Comment</p>
+                <p className="text-sm pr-2">Next Case Study</p>
                 <svg
                   class="w-4 h-4 dark:text-gray-500 group-hover:text-blue-600 dark:group-hover:text-blue-500"
                   aria-hidden="true"

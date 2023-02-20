@@ -155,13 +155,13 @@ nav {
 /* About Page */
 
 .panels {
-    min-height: 45vh;
+    min-height: 40vh;
     overflow: hidden;
     display: flex;
 }
 
 .panel {
-    background: #6B0F9C;
+    background: #fff;
     box-shadow: inset 0 0 0 5px rgba(255, 255, 255, 0.1);
     color: white;
     text-align: center;

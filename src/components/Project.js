@@ -43,21 +43,18 @@ export default function Project() {
 
   return (
     <div className="">
-      <button onClick={shareOnLinkedIn}>Share on LinkedIn</button>
-
+      <Helmet>
+        <script
+          async
+          src="https://platform.twitter.com/widgets.js"
+          charSet="utf-8"
+        />
+      </Helmet>
       <div class="bg-white text-center pt-9">
         <div class="font-bold text-xl mb-2 text-gray-800">
           Featured UX Adventures:{" "}
           <span className="text-gray-500">Tales of Delightful Design</span>
         </div>
-        <button onClick={shareOnTwitter}>Share on Twitter</button>
-        <Helmet>
-          <script
-            async
-            src="https://platform.twitter.com/widgets.js"
-            charSet="utf-8"
-          />
-        </Helmet>
         <div class="text-left bg-white p-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-5">
           <a class="flex justify-center project">
             <div class="block rounded-sm shadow-md bg-white max-w-lg item-center text hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer">
