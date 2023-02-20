@@ -1,7 +1,10 @@
 import React from 'react'
+import Case from '../components/Case'
 
 export default function cases() {
   return (
-    <div>cases</div>
+    <div>
+      <Case/>
+    </div>
   )
 }
