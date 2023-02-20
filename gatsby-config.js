@@ -15,11 +15,7 @@ const strapiConfig = {
         publicationState:
           process.env.GATSBY_IS_PREVIEW === "true" ? "preview" : "live",
         populate: {
-          category: { populate: "*" },
-          cover: "*",
-          blocks: {
-            populate: "*",
-          },
+       
         },
       },
     },
