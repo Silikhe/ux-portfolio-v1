@@ -1,10 +1,42 @@
 import React from "react";
-import { graphql } from "gatsby";
+import { graphql, Link } from "gatsby";
 import ReactMarkdown from "react-markdown";
+import confetti from "canvas-confetti";
 
 export default function CaseStudy({ data }) {
   const caseData = data.cases;
-  console.log(data);
+  function launchConfetti() {
+    let duration = 7 * 1000;
+    let animationEnd = Date.now() + duration;
+    let defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
+
+    function randomInRange(min, max) {
+      return Math.random() * (max - min) + min;
+    }
+
+    let interval = setInterval(function () {
+      let timeLeft = animationEnd - Date.now();
+
+      if (timeLeft <= 0) {
+        return clearInterval(interval);
+      }
+
+      let particleCount = 50 * (timeLeft / duration);
+      // since particles fall down, start a bit higher than random
+      confetti(
+        Object.assign({}, defaults, {
+          particleCount,
+          origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 },
+        })
+      );
+      confetti(
+        Object.assign({}, defaults, {
+          particleCount,
+          origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 },
+        })
+      );
+    }, 250);
+  }
   function hexToRgba(hex, alpha) {
     const r = parseInt(hex.slice(1, 3), 16);
     const g = parseInt(hex.slice(3, 5), 16);
@@ -12,16 +44,60 @@ export default function CaseStudy({ data }) {
     return `rgba(${r}, ${g}, ${b}, ${alpha})`;
   }
 
-  const mainColor = "#e12324";
+  
+
+  const currentCase = data.cases;
+  const allCases = data.allCases.nodes;
+  const currentCaseIndex = allCases.findIndex((c) => c.slug === caseData.slug);
+  const nextCaseIndex = (currentCaseIndex + 1) % allCases.length; // wrap around if last case
+  const nextCase = allCases[nextCaseIndex];
+
+  console.log(currentCase.theme);
+  const mainColor = currentCase.theme;
   let opacity1 = hexToRgba(mainColor, 0.1);
   let opacity5 = hexToRgba(mainColor, 0.5);
-  // const {caseData.case_study.data.case_study} = data.cases
 
   return (
     <div
-      className="bg-grey-200 dark:bg-gray-900 py-2 my-5 mx"
+      className="bg-grey-200 dark:bg-gray-900 relative py-2 my-5 mx"
       style={{ background: `${opacity1}` }}
     >
+      <div
+        class="flex justify-center fixed z-20 bottom-5  border-gray-300 text-gray-600"
+        style={{
+          left: "50%",
+        }}
+      >
+        <div class="item-center">
+          <div
+            onClick={launchConfetti}
+            className="flex bg-gray-100 text-center shadow rounded-2 px-3 py-2"
+            style={{
+              color: `white`,
+              backgroundColor: `${mainColor}`,
+              opacity: "",
+              transition: "opacity 0.3s",
+              left: "50%",
+            }}
+          >
+            <p className="text-sm pr-2">Appreciate Case Study</p>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="w-6 h-6"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"
+              />
+            </svg>
+          </div>
+        </div>
+      </div>
       <div className="bg-white mx-10 my-7">
         <div
           className="m-7  rounded-sm flex items-center justify-center flex-col min-h- w-70  text-white py-8 md:py-20 transition-all duration-300 cursor-pointer filter grayscale hover:grayscale-0"
@@ -226,8 +302,7 @@ export default function CaseStudy({ data }) {
           </div>
         </div>
         <div className="m-7 pb-8 d-flex justify-content-center align-items-center">
-          <div>{caseData.case_study.data.case_study}</div>
-          <ReactMarkdown source={caseData.case_study.data.case_study} />
+          <ReactMarkdown>{caseData.case_study.data.case_study}</ReactMarkdown>
         </div>
       </div>
       <div className="text-center mx-9 mb-2  bg-white">
@@ -239,7 +314,7 @@ export default function CaseStudy({ data }) {
         <div class="text-left bg-white p-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-5">
           <div class="w-full max-w-sm p-4 bg-white border border-gray-200 rounded-sm shadow sm:p-6 dark:bg-gray-800 dark:border-gray-700">
             <h6 class="mb-3 text-1xl text-base font-semibold text-gray-800 md:text- dark:text-white">
-              Any thoughts on Case Study!
+              Join me in a heuristic analysis of this case study, UX masters!
             </h6>
 
             <div>
@@ -312,7 +387,6 @@ export default function CaseStudy({ data }) {
               </form>
             </div>
           </div>
-
           <div class="w-full max-w-sm p-4 bg-white border border-gray-200 rounded-sm shadow sm:p-6 dark:bg-gray-800 dark:border-gray-700 align-items-center">
             <div class="kk">
               <h6 class="mb-3 text-1xl text-base font-semibold text-gray-800 md:text- dark:text-white">
@@ -431,8 +505,8 @@ export default function CaseStudy({ data }) {
           </div>
           <div class="w-full max-w-sm p-4 bg-white border border-gray-200 rounded-sm shadow sm:p-6 dark:bg-gray-800 dark:border-gray-700 align-items-center">
             <div class="kk">
-              <h6 class="mb-3 text-1xl text-base font-semibold text-gray-800 md:text- dark:text-white">
-                Let's connect and optimize our UX/UI synergy!
+              <h6 class="mb-3 text-1xl uppercase text-base font-semibold text-gray-800 md:text- dark:text-white">
+                {nextCase.title}
               </h6>
               <div>
                 <div class=" pt-4 pb-0">
@@ -471,35 +545,33 @@ export default function CaseStudy({ data }) {
 
               <div class="py-3">
                 <p class="text-gray-500 text-sm pb-4  p-case border-b border-gray-300 text-gray-600">
-                  As the lead UX designer for EssayTank at Wiggle Technology, I
-                  created a fun and user-friendly platform that streamlined
-                  academic writing with interactive prompts, easy adoption and
-                  retention, and key features like plagiarism detection and live
-                  feedback.{" "}
+                  {nextCase.project_intro}
                 </p>
               </div>
 
-              <div
-                className="flex justify-center bg-gray-100 rounded-sm cursor-pointer px-3 py-3"
-                style={{
-                  color: `${mainColor}`,
-                  backgroundColor: `${opacity1}`,
-                  opacity: "",
-                  transition: "opacity 0.3s",
-                }}
-              >
-                <p className="text-sm pr-2">Leave Comment</p>
-                <svg
-                  class="w-4 h-4 dark:text-gray-500 group-hover:text-blue-600 dark:group-hover:text-blue-500"
-                  aria-hidden="true"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                  xmlns="http://www.w3.org/2000/svg"
-                  transform="rotate(45)"
+              <Link to={`/case-study/${nextCase.slug}`}>
+                <a
+                  className="flex justify-center bg-gray-100 rounded-sm cursor-pointer px-3 py-3"
+                  style={{
+                    color: `${mainColor}`,
+                    backgroundColor: `${opacity1}`,
+                    opacity: "",
+                    transition: "opacity 0.3s",
+                  }}
                 >
-                  <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z"></path>
-                </svg>
-              </div>
+                  <p className="text-sm pr-2">Next Case Study</p>
+                  <svg
+                    class="w-4 h-4 dark:text-gray-500 group-hover:text-blue-600 dark:group-hover:text-blue-500"
+                    aria-hidden="true"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                    xmlns="http://www.w3.org/2000/svg"
+                    transform="rotate(45)"
+                  >
+                    <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z"></path>
+                  </svg>
+                </a>
+              </Link>
             </div>
           </div>
         </div>
@@ -521,6 +593,7 @@ export const query = graphql`
       title
       strapi_id
       about_company
+      theme
       case_study {
         data {
           case_study
@@ -528,6 +601,14 @@ export const query = graphql`
       }
       id
       project_intro
+    }
+    allCases: allStrapiCase(sort: { fields: strapi_id, order: ASC }) {
+      nodes {
+        title
+        slug
+        project_intro
+        id
+      }
     }
   }
 `;

@@ -1,11 +1,9 @@
 import { Link } from "gatsby";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Helmet } from "react-helmet";
 
 export default function Project({ cases }) {
-  // console.log(cases);
-
-  const [isOpen, setOpen] = useState(false);
+  const [isOpen, setOpen] = useState(null);
 
   const mainColor = "rgb(225, 35, 36)";
   let opacity1 = "rgba(225, 35, 36, .1)";
@@ -15,6 +13,26 @@ export default function Project({ cases }) {
     setOpen(!isOpen);
   };
 
+  const ref = React.useRef(null);
+
+  useEffect(() => {
+    // The DOM element is accessible here.
+    console.log(ref.current);
+  }, []);
+
+  function getDropdownIds(e, par) {
+    console.log(par);
+    const dropdownElems = document.querySelector("dropdown");
+    // console.log(e.target.id);
+    // if (e.target.id === par) {
+    //   setOpen(!isOpen);
+    // }
+    const dropdownIds = [];
+    console.log(dropdownElems);
+  }
+  
+
+  // getDropdownIds()
   const shareOnLinkedIn = () => {
     const postText =
       "Looking for some design inspiration? Check out @silikhesilas's fresh and bold portfolio! 🔥 Their case studies will take your UI/UX game to the next level. Share this secret weapon and let's take over the design world! 🚀 #designinspiration #uiux #portfoliogoals";
@@ -80,21 +98,23 @@ export default function Project({ cases }) {
           {cases.map((study) => {
             return (
               <a class="flex justify-center project" key={study.id}>
+                {/* {{id1: study.id}} */}
                 <div class="block rounded-sm shadow-md bg-white max-w-lg item-center text hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer">
                   <div class="flex justify-between px-4 pt-4 bg-ray-100 relative">
-                    <Link to={`/case-study/${study.slug}`} >
+                    <Link to={`/case-study/${study.slug}`}>
                       <h5 class="py-3 px-3 uppercase text-xl font-semibold text-gray-700 dark:text-white">
                         {study.title}{" "}
                       </h5>
                     </Link>
 
                     <button
-                      id="dropdownButton"
+                      id={study.slug}
                       data-dropdown-toggle="dropdownHover"
                       data-dropdown-trigger="hover"
                       className="inline-block drop-btn outline-none text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-1.5"
                       type="button"
-                      onClick={handleDropDown}
+                      onClick={getDropdownIds(event, study.slug)}
+                      // onClick={(e) => console.log(e.target.id)}
                     >
                       <span class="sr-only">Open dropdown</span>
                       <svg
@@ -109,12 +129,12 @@ export default function Project({ cases }) {
                     </button>
 
                     <div
-                      // id="dropdown"
-                      className={`z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow right-14 absolute ${
+                      id={study.id}
+                      className={`z-10 w-44 dropdown dropdow bg-white rounded divide-y divide-gray-100 shadow right-14 absolute ${
                         isOpen ? "block" : "hidden"
                       }`}
                     >
-                      <ul class="py-2" aria-labelledby="dropdownButton">
+                      <ul class="py-2" aria-labelledby={study.id}>
                         <li>
                           <a
                             onClick={shareOnTwitter}
@@ -225,8 +245,9 @@ export default function Project({ cases }) {
                   id="dropdownButton"
                   data-dropdown-toggle="dropdownHover"
                   data-dropdown-trigger="hover"
-                  class="inline-block text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-1.5"
+                  className="inline-block drop-btn outline-none text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-1.5"
                   type="button"
+                  onClick={handleDropDown}
                 >
                   <span class="sr-only">Open dropdown</span>
                   <svg
@@ -239,34 +260,37 @@ export default function Project({ cases }) {
                     <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z"></path>
                   </svg>
                 </button>
-                {/* <!-- Dropdown menu --> */}
+
                 <div
-                  id="dropdown"
-                  class="z-10 hidden text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700"
+                  // id="dropdown"
+                  className={`z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow right-14 absolute ${
+                    isOpen ? "block" : "hidden"
+                  }`}
                 >
                   <ul class="py-2" aria-labelledby="dropdownButton">
                     <li>
                       <a
-                        href="#"
+                        onClick={shareOnTwitter}
                         class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
                       >
-                        Edit
+                        Share on Twitter
                       </a>
                     </li>
                     <li>
                       <a
                         href="#"
-                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                        onClick={shareOnLinkedIn}
+                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white "
                       >
-                        Export Data
+                        Share on LinkedIn
                       </a>
                     </li>
                     <li>
                       <a
-                        href="#"
-                        class="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                        onClick={handleDropDown}
+                        className="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
                       >
-                        Delete
+                        Close
                       </a>
                     </li>
                   </ul>
@@ -316,22 +340,6 @@ export default function Project({ cases }) {
                   ></div>
                 </div>
               </div>
-              {/* <div class=" justify-between pb-5 py-3 px-6 border-t border-gray-300 text-gray-600">
-                <div class="flex justify-between mb-1">
-                  <span class="text-base font-medium text-blue-700 dark:text-white">
-                    Progress
-                  </span>
-                  <span class="text-sm font-medium text-blue-700 dark:text-white">
-                    45%
-                  </span>
-                </div>
-                <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
-                  <div
-                    class="bg-blue-600 h-2.5 rounded-full"
-                    style={{ width: "45%" }}
-                  ></div>
-                </div>
-              </div> */}
             </div>
           </div>
 
