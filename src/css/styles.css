@@ -63,6 +63,11 @@ nav {
 }
 
 
+.project:hover .child{
+    color: #e12324;
+    background-color: rgba(225, 35, 36, .1);
+}
+
 
 .tag {
     position: absolute;

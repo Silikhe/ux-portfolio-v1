@@ -1,7 +1,10 @@
+import { Link } from "gatsby";
 import React, { useState } from "react";
 import { Helmet } from "react-helmet";
 
-export default function Project() {
+export default function Project({ cases }) {
+  // console.log(cases);
+
   const [isOpen, setOpen] = useState(false);
 
   const mainColor = "rgb(225, 35, 36)";
@@ -11,27 +14,39 @@ export default function Project() {
   const handleDropDown = () => {
     setOpen(!isOpen);
   };
-  // const closeDropdown = () => {
-  //   setIsOpen(false);
-  // };
 
   const shareOnLinkedIn = () => {
-    const postTitle = "My awesome post";
-    const postSummary = "Check out my latest post";
-    const imageUrl = "https://example.com/image.jpg"; // replace with the URL of your image
-    const linkedinUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(
-      url
-    )}&title=${encodeURIComponent(postTitle)}&summary=${encodeURIComponent(
-      postSummary
-    )}&source=LinkedIn&mini=true&ro=true&ir=true&media=${imageUrl}`;
-    window.open(linkedinUrl);
+    const postText =
+      "Looking for some design inspiration? Check out @silikhesilas's fresh and bold portfolio! 🔥 Their case studies will take your UI/UX game to the next level. Share this secret weapon and let's take over the design world! 🚀 #designinspiration #uiux #portfoliogoals";
+    const postUrl = "https://silikhe.com"; // replace with the URL of your post
+
+    const linkedInUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(
+      postUrl
+    )}&title=${encodeURIComponent(postText)}&summary=${encodeURIComponent(
+      postText
+    )}&source=LinkedIn&thumbnailUrl=${imageUrl}`;
+
+    window.open(linkedInUrl);
   };
+
+  const imageUrl =
+    "https://cdn.dribbble.com/userupload/4173060/file/original-c4631c707d399a30ca45327f09e036e5.png?compress=1&resize=1024x768";
+
+  fetch(imageUrl)
+    .then((response) => response.blob())
+    .then((blob) => {
+      const fileSizeInMB = blob.size / (1024 * 1024);
+
+      if (fileSizeInMB > 5) {
+        console.log("Image file is too large");
+      } else {
+        console.log("Image file is within size limit");
+      }
+    });
 
   const shareOnTwitter = () => {
     const tweetText =
       "Feeling stuck in a design rut? Check out @silikhesilas's fresh and bold portfolio! 🔥 Their case studies will take your UI/UX game to the next level. Share this secret weapon and let's take over the design world! 🚀 #designinspiration #uiux #portfoliogoals";
-    const imageUrl =
-      "https://cdn.dribbble.com/userupload/4173060/file/original-c4631c707d399a30ca45327f09e036e5.png?compress=1&resize=1024x768"; // replace with the URL of your image
     const tweetUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(
       url
     )}&text=${encodeURIComponent(
@@ -49,6 +64,12 @@ export default function Project() {
           src="https://platform.twitter.com/widgets.js"
           charSet="utf-8"
         />
+        <script
+          async
+          defer
+          src="//platform.linkedin.com/in.js"
+          type="text/javascript"
+        ></script>
       </Helmet>
       <div class="bg-white text-center pt-9">
         <div class="font-bold text-xl mb-2 text-gray-800">
@@ -56,441 +77,131 @@ export default function Project() {
           <span className="text-gray-500">Tales of Delightful Design</span>
         </div>
         <div class="text-left bg-white p-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-5">
-          <a class="flex justify-center project">
-            <div class="block rounded-sm shadow-md bg-white max-w-lg item-center text hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer">
-              <div class="flex justify-between px-4 pt-4 bg-ray-100 relative">
-                <h5 class="py-3 px-3 text-xl font-bold text-gray-700 dark:text-white">
-                  Main Project Title{" "}
-                </h5>
+          {cases.map((study) => {
+            return (
+              <a class="flex justify-center project" key={study.id}>
+                <div class="block rounded-sm shadow-md bg-white max-w-lg item-center text hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer">
+                  <div class="flex justify-between px-4 pt-4 bg-ray-100 relative">
+                    <Link to={`/case-study/${study.slug}`} >
+                      <h5 class="py-3 px-3 uppercase text-xl font-semibold text-gray-700 dark:text-white">
+                        {study.title}{" "}
+                      </h5>
+                    </Link>
 
-                <button
-                  id="dropdownButton"
-                  data-dropdown-toggle="dropdownHover"
-                  data-dropdown-trigger="hover"
-                  className="inline-block drop-btn outline-none text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-1.5"
-                  type="button"
-                  onClick={handleDropDown}
-                >
-                  <span class="sr-only">Open dropdown</span>
-                  <svg
-                    class="w-6 h-6"
-                    aria-hidden="true"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z"></path>
-                  </svg>
-                </button>
-
-                <div
-                  // id="dropdown"
-                  className={`z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow right-14 absolute ${
-                    isOpen ? "block" : "hidden"
-                  }`}
-                >
-                  <ul class="py-2" aria-labelledby="dropdownButton">
-                    <li>
-                      <a
-                        onClick={shareOnTwitter}
-                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                      >
-                        Share on Twitter
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        href="#"
-                        onClick={shareOnLinkedIn}
-                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white "
-                      >
-                        Share on Twitter
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        onClick={handleDropDown}
-                        className="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                      >
-                        Close
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-              <div>
-                <div class="px-6 pt-4 pb-0">
-                  <span class="inline-block bg-gray-100 rounded-2 px-3 py-1 text-sm  text-gray-500 mr-2 mb-1">
-                    <span>UI Design</span>
-                  </span>
-                  <span class="inline-block bg-gray-100 rounded-2 px-3 py-1 text-sm  text-gray-500 mr-2 mb-1">
-                    <span>UX Design</span>
-                  </span>
-                  <span class="inline-block bg-gray-100 rounded-2 px-3 py-1 text-sm  text-gray-500 mr-2 mb-1">
-                    <span>UX Research</span>
-                  </span>
-                </div>
-              </div>
-              <div class="p-6">
-                <p class="text-gray-500 text-base mb-4">
-                  As the lead UX designer for EssayTank at Wiggle Technology, I
-                  created a fun and user-friendly platform that streamlined
-                  academic writing with interactive prompts, easy adoption and
-                  retention, and key features like plagiarism detection and live
-                  feedback.{" "}
-                </p>
-                <div>
-                  <span class="inline-block   text-sm  text-gray-800 mr-2 mb-1">
-                    <span className="">CONTEXT: </span>{" "}
-                    <span className="">EDU TECH</span>
-                  </span>
-                </div>
-              </div>
-              <div class="flex justify-between py-3 px-6 border-t border-gray-300 text-gray-600">
-                <p className="">2020</p>
-                <div class="flex  justify-between  ">
-                  <div
-                    className="flex kk bg-gray-100 rounded-2 px-3 py-2"
-                    style={{
-                      color: `${mainColor}`,
-                      backgroundColor: `${opacity1}`,
-                      opacity: "",
-                      transition: "opacity 0.3s",
-                    }}
-                  >
-                    <p className="text-sm pr-2">View Case Study</p>
-                    <svg
-                      class="w-4 h-4 dark:text-gray-500 group-hover:text-blue-600 dark:group-hover:text-blue-500"
-                      aria-hidden="true"
-                      fill="currentColor"
-                      viewBox="0 0 20 20"
-                      xmlns="http://www.w3.org/2000/svg"
-                      transform="rotate(45)"
+                    <button
+                      id="dropdownButton"
+                      data-dropdown-toggle="dropdownHover"
+                      data-dropdown-trigger="hover"
+                      className="inline-block drop-btn outline-none text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-1.5"
+                      type="button"
+                      onClick={handleDropDown}
                     >
-                      <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z"></path>
-                    </svg>
+                      <span class="sr-only">Open dropdown</span>
+                      <svg
+                        class="w-6 h-6"
+                        aria-hidden="true"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z"></path>
+                      </svg>
+                    </button>
+
+                    <div
+                      // id="dropdown"
+                      className={`z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow right-14 absolute ${
+                        isOpen ? "block" : "hidden"
+                      }`}
+                    >
+                      <ul class="py-2" aria-labelledby="dropdownButton">
+                        <li>
+                          <a
+                            onClick={shareOnTwitter}
+                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                          >
+                            Share on Twitter
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            href="#"
+                            onClick={shareOnLinkedIn}
+                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white "
+                          >
+                            Share on LinkedIn
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            onClick={handleDropDown}
+                            className="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                          >
+                            Close
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
                   </div>
+                  <Link to={`/case-study/${study.slug}`}>
+                    <div>
+                      <div class="px-6 pt-4 pb-0">
+                        <span class="inline-block bg-gray-100 rounded-2 px-3 py-1 text-sm  text-gray-500 mr-2 mb-1">
+                          <span>UI Design</span>
+                        </span>
+                        <span class="inline-block bg-gray-100 rounded-2 px-3 py-1 text-sm  text-gray-500 mr-2 mb-1">
+                          <span>UX Design</span>
+                        </span>
+                        <span class="inline-block bg-gray-100 rounded-2 px-3 py-1 text-sm  text-gray-500 mr-2 mb-1">
+                          <span>UX Research</span>
+                        </span>
+                      </div>
+                    </div>
+                    <div class="p-6">
+                      <p class="text-gray-500 text-base mb-4">
+                        {study.project_intro}
+                      </p>
+                      <div>
+                        <span class="inline-block   text-sm  text-gray-800 mr-2 mb-1">
+                          <span className="">CONTEXT: </span>{" "}
+                          <span className="uppercase">{study.context}</span>
+                        </span>
+                      </div>
+                    </div>
+                    <div class="flex justify-between items-center  py-3 px-6 border-t border-gray-300 text-gray-600">
+                      <p className="">{study.duration}</p>
+                      <div class="flex items-center  justify-between  ">
+                        <div
+                          className="flex child rounded-2 px-4 py-2"
+                          style={{
+                            opacity: "",
+                            transition: "opacity 0.3s",
+                            ":hover": {
+                              color: `${mainColor}`,
+                              backgroundColor: `${opacity1}`,
+                            },
+                          }}
+                        >
+                          <p className="text-sm pr-2 my-1">View Case Study</p>
+                          <svg
+                            class="w-4 h-4 dark:text-gray-500 group-hover:text-blue-600 dark:group-hover:text-blue-500"
+                            aria-hidden="true"
+                            fill="currentColor"
+                            viewBox="0 0 20 20"
+                            xmlns="http://www.w3.org/2000/svg"
+                            transform="rotate(45)"
+                          >
+                            <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z"></path>
+                          </svg>
+                        </div>
+                      </div>
+                    </div>
+                  </Link>
                 </div>
-              </div>
-            </div>
-          </a>
-          <div class="flex justify-center">
-            <div class="block rounded-2 shadow-md bg-white max-w-lg item-center text ">
-              {/* <div class="py-3 px-6 border-b border-gray-300">Featured</div> */}
-              <div class="flex justify-between px-4 pt-4 bg-ray-100">
-                <h5 class="py-3 px-3 text-xl font-bold text-gray-700 dark:text-white">
-                  Essaytank website design{" "}
-                </h5>
+              </a>
+            );
+          })}
 
-                <button
-                  id="dropdownButton"
-                  data-dropdown-toggle="dropdownHover"
-                  data-dropdown-trigger="hover"
-                  class="inline-block text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-1.5"
-                  type="button"
-                >
-                  <svg
-                    class="w-6 h-6"
-                    aria-hidden="true"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z"></path>
-                  </svg>
-                </button>
-                {/* <!-- Dropdown menu --> */}
-                <div
-                  id="dropdown"
-                  class="z-10 hidden text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700"
-                >
-                  <ul class="py-2" aria-labelledby="dropdownButton">
-                    <li>
-                      <a
-                        href="#"
-                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                      >
-                        Edit
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        href="#"
-                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                      >
-                        Export Data
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        href="#"
-                        class="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                      >
-                        Delete
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-              <div>
-                <div class="px-6 pt-4 pb-0">
-                  <span class="inline-block bg-gray-100 rounded-2 px-3 py-1 text-sm  text-gray-500 mr-2 mb-1">
-                    <span>UI Design</span>
-                  </span>
-                  <span class="inline-block bg-gray-100 rounded-2 px-3 py-1 text-sm  text-gray-500 mr-2 mb-1">
-                    <span>UX Design</span>
-                  </span>
-                  <span class="inline-block bg-gray-100 rounded-2 px-3 py-1 text-sm  text-gray-500 mr-2 mb-1">
-                    <span>UX Research</span>
-                  </span>
-                </div>
-              </div>
-              <div class="p-6">
-                <p class="text-gray-500 text-base mb-4">
-                  As the lead UX designer for EssayTank at Wiggle Technology, I
-                  created a fun and user-friendly platform that streamlined
-                  academic writing with interactive prompts, easy adoption and
-                  retention, and key features like plagiarism detection and live
-                  feedback.{" "}
-                </p>
-                <div>
-                  <span class="inline-block   text-sm  text-gray-800 mr-2 mb-1">
-                    <span className="">CONTEXT: </span>{" "}
-                    <span className="">EDU TECH</span>
-                  </span>
-                </div>
-              </div>
-              <div class="flex justify-between py-3 px-6 border-t border-gray-300 text-gray-600">
-                <p className="">2020</p>
-                <div className="flex">
-                  <span class="mr-2">Explore</span>
-                  <svg
-                    class="w-4 h-4 text-gray-400 dark:text-gray-500 group-hover:text-blue-600 dark:group-hover:text-blue-500"
-                    aria-hidden="true"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg"
-                    transform="rotate(45)"
-                  >
-                    <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z"></path>
-                  </svg>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="flex justify-center">
-            <div class="block rounded-2 shadow-md bg-white max-w-lg item-center text ">
-              <div class="flex justify-between px-4 pt-4 bg-ray-100">
-                <h5 class="py-3 px-3 text-xl font-bold text-gray-700 dark:text-white">
-                  Essaytank website design{" "}
-                </h5>
-
-                <button
-                  id="dropdownButton"
-                  data-dropdown-toggle="dropdownHover"
-                  data-dropdown-trigger="hover"
-                  class="inline-block text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-1.5"
-                  type="button"
-                >
-                  <span class="sr-only">Open dropdown</span>
-                  <svg
-                    class="w-6 h-6"
-                    aria-hidden="true"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z"></path>
-                  </svg>
-                </button>
-                {/* <!-- Dropdown menu --> */}
-                <div
-                  id="dropdown"
-                  class="z-10 hidden text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700"
-                >
-                  <ul class="py-2" aria-labelledby="dropdownButton">
-                    <li>
-                      <a
-                        href="#"
-                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                      >
-                        Edit
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        href="#"
-                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                      >
-                        Export Data
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        href="#"
-                        class="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                      >
-                        Delete
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-
-              <div>
-                <div class="px-6 pt-4 pb-0">
-                  <span class="inline-block bg-gray-100 rounded-2 px-3 py-1 text-sm  text-gray-500 mr-2 mb-1">
-                    <span>UI Design</span>
-                  </span>
-                  <span class="inline-block bg-gray-100 rounded-2 px-3 py-1 text-sm  text-gray-500 mr-2 mb-1">
-                    <span>UX Design</span>
-                  </span>
-                  <span class="inline-block bg-gray-100 rounded-2 px-3 py-1 text-sm  text-gray-500 mr-2 mb-1">
-                    <span>UX Research</span>
-                  </span>
-                </div>
-              </div>
-              <div class="p-6">
-                <p class="text-gray-500 text-base mb-4">
-                  As the lead UX designer for EssayTank at Wiggle Technology, I
-                  created a fun and user-friendly platform that streamlined
-                  academic writing with interactive prompts, easy adoption and
-                  retention, and key features like plagiarism detection and live
-                  feedback.{" "}
-                </p>
-                <div>
-                  <span class="inline-block   text-sm  text-gray-800 mr-2 mb-1">
-                    <span className="">CONTEXT: </span>{" "}
-                    <span className="">EDU TECH</span>
-                  </span>
-                </div>
-              </div>
-              <div class="flex justify-between py-3 px-6 border-t border-gray-300 text-gray-600">
-                <p className="">2020</p>
-                <div className="flex">
-                  <span class="mr-2">Explore</span>
-                  <svg
-                    class="w-4 h-4 text-gray-400 dark:text-gray-500 group-hover:text-blue-600 dark:group-hover:text-blue-500"
-                    aria-hidden="true"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg"
-                    transform="rotate(45)"
-                  >
-                    <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z"></path>
-                  </svg>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="flex justify-center">
-            <div class="block rounded-2 shadow-md bg-white max-w-lg item-center text ">
-              {/* <div class="py-3 px-6 border-b border-gray-300">Featured</div> */}
-              <div class="flex justify-between px-4 pt-4 bg-ray-100">
-                <h5 class="py-3 px-3 text-xl font-bold text-gray-700 dark:text-white">
-                  Essaytank website design{" "}
-                </h5>
-
-                <button
-                  id="dropdownButton"
-                  data-dropdown-toggle="dropdownHover"
-                  data-dropdown-trigger="hover"
-                  class="inline-block text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-1.5"
-                  type="button"
-                >
-                  <span class="sr-only">Open dropdown</span>
-                  <svg
-                    class="w-6 h-6"
-                    aria-hidden="true"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z"></path>
-                  </svg>
-                </button>
-                {/* <!-- Dropdown menu --> */}
-                <div
-                  id="dropdown"
-                  class="z-10 hidden text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700"
-                >
-                  <ul class="py-2" aria-labelledby="dropdownButton">
-                    <li>
-                      <a
-                        href="#"
-                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                      >
-                        Edit
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        href="#"
-                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                      >
-                        Export Data
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        href="#"
-                        class="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                      >
-                        Delete
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-
-              <div>
-                <div class="px-6 pt-4 pb-0">
-                  <span class="inline-block bg-gray-100 rounded-2 px-3 py-1 text-sm  text-gray-500 mr-2 mb-1">
-                    <span>UI Design</span>
-                  </span>
-                  <span class="inline-block bg-gray-100 rounded-2 px-3 py-1 text-sm  text-gray-500 mr-2 mb-1">
-                    <span>UX Design</span>
-                  </span>
-                  <span class="inline-block bg-gray-100 rounded-2 px-3 py-1 text-sm  text-gray-500 mr-2 mb-1">
-                    <span>UX Research</span>
-                  </span>
-                </div>
-              </div>
-              <div class="p-6">
-                <p class="text-gray-500 text-base mb-4">
-                  As the lead UX designer for EssayTank at Wiggle Technology, I
-                  created a fun and user-friendly platform that streamlined
-                  academic writing with interactive prompts, easy adoption and
-                  retention, and key features like plagiarism detection and live
-                  feedback.{" "}
-                </p>
-                <div>
-                  <span class="inline-block   text-sm  text-gray-800 mr-2 mb-1">
-                    <span className="">CONTEXT: </span>{" "}
-                    <span className="">EDU TECH</span>
-                  </span>
-                </div>
-              </div>
-              <div class="flex justify-between py-3 px-6 border-t border-gray-300 text-gray-600">
-                <p className="">2020</p>
-                <div className="flex">
-                  <span class="mr-2">Explore</span>
-                  <svg
-                    class="w-4 h-4 text-gray-400 dark:text-gray-500 group-hover:text-blue-600 dark:group-hover:text-blue-500"
-                    aria-hidden="true"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg"
-                    transform="rotate(45)"
-                  >
-                    <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z"></path>
-                  </svg>
-                </div>
-              </div>
-            </div>
-          </div>
           <div class="flex justify-center over">
             <div class="rounded-2 shadow-md bg-white max-w-lg item-center overflow-hidden project">
               <div class="project-img relative">

@@ -1,7 +1,10 @@
 import React from "react";
-import { Link } from "gatsby";
+import { graphql } from "gatsby";
+import ReactMarkdown from "react-markdown";
 
-export default function CaseStudy({data}) {
+export default function CaseStudy({ data }) {
+  const caseData = data.cases;
+  console.log(data);
   function hexToRgba(hex, alpha) {
     const r = parseInt(hex.slice(1, 3), 16);
     const g = parseInt(hex.slice(3, 5), 16);
@@ -12,6 +15,7 @@ export default function CaseStudy({data}) {
   const mainColor = "#e12324";
   let opacity1 = hexToRgba(mainColor, 0.1);
   let opacity5 = hexToRgba(mainColor, 0.5);
+  // const {caseData.case_study.data.case_study} = data.cases
 
   return (
     <div
@@ -31,10 +35,10 @@ export default function CaseStudy({data}) {
             }}
           ></div>
           <h1 className="text-medium  text-gray-100 mt-5  tracking-tight leading-tight mb-1 md:mb-2">
-            Passion Project
+            {caseData.project_type}
           </h1>
           <h5 class="py-5 px-3 text-2xl font-medium text-grey-100 dark:text-white">
-            Essaytank website design{" "}
+            {caseData.title}
           </h5>
         </div>
 
@@ -42,19 +46,19 @@ export default function CaseStudy({data}) {
           <div class="flex items-center g-gray-100  mr-4">
             <p className="text-bold">
               Role: {""}
-              <span className="text-gray-500">Product designer</span>{" "}
+              <span className="text-gray-500">{caseData.role} </span>{" "}
             </p>
           </div>
           <div class="flex items-center g-gray-100  mr-4">
             <p className="text-bold">
               Context: {""}
-              <span className="text-gray-500">Edu Tech</span>{" "}
+              <span className="text-gray-500">{caseData.context} </span>{" "}
             </p>
           </div>
           <div class="flex items-center g-gray-100  mr-4">
             <p className="text-bold">
               Duration: {""}
-              <span className="text-gray-500">Feb 2015 - Aug 2016</span>{" "}
+              <span className="text-gray-500">{caseData.duration}</span>{" "}
             </p>
           </div>
         </div>
@@ -65,14 +69,7 @@ export default function CaseStudy({data}) {
               Individual Contribution
             </h5>
             <p class="text-gray-500 text-base mb-4">
-              I was hired as the only designer on the team, working under the
-              product team, while also assisting in marketing design efforts. I
-              reported directly to the VP of product and the CEO (who was a
-              design advocate). Being a part of a team where leadership was
-              built on the understanding that great design is important, allowed
-              me to create my best work. I was originally hired to work on the
-              marketing landing pages, banner ads and social media collateral,
-              but quickly moved into a product design role.
+              {caseData.individual_contribution}
             </p>
           </div>
           <div class="col-span-1">
@@ -118,25 +115,13 @@ export default function CaseStudy({data}) {
               <div className="my-2">
                 <h5 className="text-gray-800 mb-1 ">About</h5>
                 <p class="text-gray-500 text-base mb-4">
-                  I was hired as the only designer on the team, working under
-                  the product team, while also assisting in marketing design
-                  efforts. I reported directly to the VP of product and the CEO
-                  (who was a design advocate). Being a part of a team where
-                  leadership was built on the understanding that great design is
-                  important, allowed me to create my best work. I was originally
-                  hired to work on the marketing landing pages, banner ads and
-                  social media collateral, but quickly moved into a product
-                  design role.
+                  {caseData.about_company}
                 </p>
               </div>
               <div className="my-2">
                 <h5 className="text-gray-800 mb-1 ">Challenges</h5>
                 <p class="text-gray-500 text-base mb-4">
-                  I was hired as the only designer on the team, working under
-                  the product team, while also assisting in marketing design
-                  efforts. I reported directly to the VP of product and the CEO
-                  (who was a design advocate). Being a part of a team where
-                  leadership was built on the understanding that great.
+                  {caseData.design_challenge}
                 </p>
               </div>
             </div>
@@ -240,8 +225,9 @@ export default function CaseStudy({data}) {
             </div>
           </div>
         </div>
-        <div className="text-center m-7 pb-8  ">
-          <h1 className="text-5xl font-bold p-10">Case Study</h1>
+        <div className="m-7 pb-8 d-flex justify-content-center align-items-center">
+          <div>{caseData.case_study.data.case_study}</div>
+          <ReactMarkdown source={caseData.case_study.data.case_study} />
         </div>
       </div>
       <div className="text-center mx-9 mb-2  bg-white">
@@ -255,7 +241,7 @@ export default function CaseStudy({data}) {
             <h6 class="mb-3 text-1xl text-base font-semibold text-gray-800 md:text- dark:text-white">
               Any thoughts on Case Study!
             </h6>
-            
+
             <div>
               <form>
                 <div className="mb-2">
@@ -482,7 +468,7 @@ export default function CaseStudy({data}) {
                   </span>
                 </div>
               </div>
-              
+
               <div class="py-3">
                 <p class="text-gray-500 text-sm pb-4  p-case border-b border-gray-300 text-gray-600">
                   As the lead UX designer for EssayTank at Wiggle Technology, I
@@ -492,35 +478,56 @@ export default function CaseStudy({data}) {
                   feedback.{" "}
                 </p>
               </div>
-  
+
               <div
-                  className="flex justify-center bg-gray-100 rounded-sm cursor-pointer px-3 py-3"
-                  style={{
-                    color: `${mainColor}`,
-                    backgroundColor: `${opacity1}`,
-                    opacity: "",
-                    transition: "opacity 0.3s",
-                  }}
+                className="flex justify-center bg-gray-100 rounded-sm cursor-pointer px-3 py-3"
+                style={{
+                  color: `${mainColor}`,
+                  backgroundColor: `${opacity1}`,
+                  opacity: "",
+                  transition: "opacity 0.3s",
+                }}
+              >
+                <p className="text-sm pr-2">Leave Comment</p>
+                <svg
+                  class="w-4 h-4 dark:text-gray-500 group-hover:text-blue-600 dark:group-hover:text-blue-500"
+                  aria-hidden="true"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg"
+                  transform="rotate(45)"
                 >
-                  <p className="text-sm pr-2">Leave Comment</p>
-                  <svg
-                    class="w-4 h-4 dark:text-gray-500 group-hover:text-blue-600 dark:group-hover:text-blue-500"
-                    aria-hidden="true"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg"
-                    transform="rotate(45)"
-                  >
-                    <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z"></path>
-                  </svg>
-                </div>
-
-
+                  <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z"></path>
+                </svg>
+              </div>
             </div>
           </div>
-          
         </div>
       </div>
     </div>
   );
 }
+
+export const query = graphql`
+  query ($slug: String!) {
+    cases: strapiCase(slug: { eq: $slug }) {
+      design_challenge
+      context
+      duration
+      individual_contribution
+      project_type
+      role
+      slug
+      title
+      strapi_id
+      about_company
+      case_study {
+        data {
+          case_study
+        }
+      }
+      id
+      project_intro
+    }
+  }
+`;

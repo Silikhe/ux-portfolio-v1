@@ -18,7 +18,7 @@ export default function IndexPage ({ data }) {
     <div className="">
       <Layout>
         <Hero />
-        <Project />
+        <Project cases={cases}/>
         <Article />
       </Layout>
     </div>
