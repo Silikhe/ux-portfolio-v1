@@ -2,28 +2,31 @@ import * as React from "react";
 import { graphql } from "gatsby";
 
 import Article from "../components/Article";
-import Case from "../components/Case";
-import Footer from "../components/Footer";
 import Hero from "../components/Hero";
 import Layout from "../components/Layout";
-import Navbar from "../components/Navbar";
 import Project from "../components/Project";
+import DataContext from "../DataContext";
+import Case from "../components/Case";
+import Medium from "../components/Medium";
 
-export default function IndexPage ({ data }) {
+export default function IndexPage({ data }) {
   const {
     allStrapiCase: { nodes: cases },
   } = data;
   console.log(data);
   return (
     <div className="">
-      <Layout>
-        <Hero />
-        <Project cases={cases}/>
-        <Article />
-      </Layout>
+      <DataContext.Provider value={{ data }}>
+        <Layout>
+          <Hero />
+          <Project cases={cases} />
+          <Article />
+          <Medium/>
+        </Layout>
+      </DataContext.Provider>
     </div>
   );
-};
+}
 
 export const query = graphql`
   query {
@@ -39,6 +42,8 @@ export const query = graphql`
         title
         strapi_id
         about_company
+        pin
+        private
         case_study {
           data {
             case_study
@@ -49,10 +54,6 @@ export const query = graphql`
       }
     }
   }
-  
-  `;
-
- 
-  
+`;
 
 export const Head = () => <title>SILIKHE | PORTFOLIO</title>;

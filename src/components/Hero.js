@@ -3,7 +3,7 @@ import React, { useState } from "react";
 export default function Hero() {
   return (
     <div>
-      <div className="sec text-center flex flex-col justify-center items-center">
+      <div className="sec text-center my-5 flex flex-col justify-center items-center">
         <h1 className="mb-4 font-bold leading-none tracking-tight text-gray-900 md:text-3xl lg:text-4xl dark:text-white">
           Pixel Perfect, User-Centric Design Maverick!{" "}
         </h1>

@@ -1,16 +1,20 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "gatsby";
 
-export default function Navbar() {
+export default function Navbar(props) {
   const [isCopied, setIsCopied] = useState(false);
   const [prevScrollPos, setPrevScrollPos] = useState(0);
   const [visible, setVisible] = useState(true);
   const [isAlertVisible, setIsAlertVisible] = useState(false);
+  const [activeLink, setActiveLink] = useState(null);
+
+  const { color } = props;
 
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollPos = window.pageYOffset;
-      const visible = prevScrollPos > currentScrollPos;
+      const visible =
+        prevScrollPos >= currentScrollPos || currentScrollPos === 0;
       setVisible(visible);
       setPrevScrollPos(currentScrollPos);
     };
@@ -26,6 +30,31 @@ export default function Navbar() {
     }, 1000);
   }
 
+  const defaultColor = "#e12324";
+
+  const navbarStyle = {
+    backgroundColor: color || defaultColor,
+    // ...
+  };
+  function hexToRgba(hex, alpha = 1) {
+    if (!hex) {
+      return { r: 0, g: 0, b: 0, alpha };
+    }
+    const [r, g, b] = hex.match(/\w\w/g).map((x) => parseInt(x, 16));
+    return { r, g, b, alpha };
+  }
+
+  const rgba = hexToRgba(color);
+  console.log(rgba);
+
+  const handleHover = (e) => {
+    e.target.style.color = color;
+  };
+
+  const handleLeave = (e) => {
+    e.target.style.color = "";
+  };
+
   return (
     <div>
       <nav
@@ -35,8 +64,15 @@ export default function Navbar() {
         style={{ flexWrap: "wrap" }}
       >
         <div className="flex-shrink-0 container flex flex-wrap items-center justify-between mx-auto">
-          <Link to="/">
-            <a className="flex items-center ">
+          <Link
+            to="/"
+            // style={{ color: color }}
+          >
+            <a
+              className="flex items-center "
+              onMouseEnter={handleHover}
+              onMouseLeave={handleLeave}
+            >
               <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white logo">
                 Silikhe_
               </span>
@@ -46,11 +82,15 @@ export default function Navbar() {
             <span
               className="text-sm font-medium mr-3 px-3.5 py-1.5 rounded-sm dark:bg-gray-700 dark:text-purple-400 outline-none hidden sm:block"
               style={{
-                backgroundColor: `rgba(225, 35, 36, 0.1)`,
-                color: `rgba(225, 35, 36, .8)`,
-                border: `.5px solid rgba(225, 35, 36, 1)`,
+                backgroundColor: `rgba(${rgba.r}, ${rgba.g}, ${rgba.b}, ${
+                  (rgba.alpha, 0.1)
+                })`,
+                color: `rgba(${rgba.r}, ${rgba.g}, ${rgba.b}, ${
+                  (rgba.alpha, 0.8)
+                })`,
+                border: `.5px solid rgba(${rgba.r}, ${rgba.g}, ${rgba.b}, 1)`,
               }}
-              // onClick={handleClick}
+              onClick={handleClick}
             >
               silikhesilas@gmail.com
             </span>
@@ -75,7 +115,9 @@ export default function Navbar() {
                 </svg>
                 <span className="sr-only">Info</span>
                 <div>
-                  <span className="font-medium">Email Copied to clipboard!</span>
+                  <span className="font-medium">
+                    Email Copied to clipboard!
+                  </span>
                 </div>
               </div>
             )}
@@ -110,11 +152,24 @@ export default function Navbar() {
           >
             <ul class="flex flex-col p-4 mt-4 border border-gray-100 rounded-sm  md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 ">
               <li>
-                <Link to="/">
+                <Link
+                  to="/"
+                  style={{
+                    // marginRight: "1rem",
+                    color: activeLink === 0 ? color : "#000",
+                    fontWeight: activeLink === 0 ? "bold" : "normal",
+                    cursor: "pointer",
+                  }}
+                >
                   <a
                     href="#"
                     class="block py-2 pl-3 pr-4 text-white rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white"
-                    style={{ color: `rgba(225, 35, 36, 1)` }}
+                    style={{
+                      fontWeight: activeLink === 0 ? "bold" : "normal",
+                      color: `rgba(${rgba.r}, ${rgba.g}, ${rgba.b}, ${
+                        (rgba.alpha, 1)
+                      })`,
+                    }}
                     aria-current="page"
                   >
                     HOME
@@ -138,7 +193,6 @@ export default function Navbar() {
             </ul>
           </div>
         </div>
-        
       </nav>
     </div>
   );

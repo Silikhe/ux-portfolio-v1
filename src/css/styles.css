@@ -12,16 +12,16 @@ body {
 
 /* Navbar */
 
-.logo:hover {
+/* .logo:hover {
     color: rgba(225, 35, 36);
-}
+} */
 
 .transition-colors:hover {
     color: rgb(225, 35, 36);
 }
 
 nav {
-    background-color: #FDFDFD;
+    background-color: rgb(253, 253, 253);
 }
 
 /* Hero */
@@ -32,7 +32,7 @@ nav {
 
 /* Projects Section */
 .sec {
-    padding: 13% 0px 5%;
+    padding: 5% 0px 5%;
     height: 100%;
 }
 
@@ -66,6 +66,19 @@ nav {
 .project:hover .child{
     color: #e12324;
     background-color: rgba(225, 35, 36, .1);
+}
+
+.project-progress:hover .pro, .pro-1 {
+    color: #e12324;
+}
+
+.project-progress:hover  .pro-1 {
+    background: #e12324;
+}
+
+.project-progress:hover .prog{
+    background: #e12324;
+
 }
 
 

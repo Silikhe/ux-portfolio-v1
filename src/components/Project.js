@@ -1,10 +1,18 @@
 import { Link } from "gatsby";
 import React, { useState, useEffect } from "react";
 import { Helmet } from "react-helmet";
+import Modal from "./Modal";
+import { navigate } from "gatsby-link";
+
+// import { Link as RouterLink, useLocation, useHistory } from 'react-router-dom';
 
 export default function Project({ cases }) {
   const [isOpen, setOpen] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [userInput, setUserInput] = useState("");
+  const [errorMessage, setErrorMessage] = useState(null);
 
+  console.log(cases);
   const mainColor = "rgb(225, 35, 36)";
   let opacity1 = "rgba(225, 35, 36, .1)";
   const url = window.location.href;
@@ -15,6 +23,14 @@ export default function Project({ cases }) {
 
   const ref = React.useRef(null);
 
+  const handleModalOpen = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleModalClose = () => {
+    setIsModalOpen(false);
+  };
+
   useEffect(() => {
     // The DOM element is accessible here.
     console.log(ref.current);
@@ -23,14 +39,10 @@ export default function Project({ cases }) {
   function getDropdownIds(e, par) {
     console.log(par);
     const dropdownElems = document.querySelector("dropdown");
-    // console.log(e.target.id);
-    // if (e.target.id === par) {
-    //   setOpen(!isOpen);
-    // }
+
     const dropdownIds = [];
     console.log(dropdownElems);
   }
-  
 
   // getDropdownIds()
   const shareOnLinkedIn = () => {
@@ -74,6 +86,25 @@ export default function Project({ cases }) {
     window.open(tweetUrl);
   };
 
+  const handleInputChange = (event) => {
+    setUserInput(event.target.value);
+  };
+
+  const handleSubmit = (e, pin, slag) => {
+    e.preventDefault();
+    setIsModalOpen(false);
+    if (userInput == pin) {
+      // alert("lol");
+      navigate(`/case-study/${slag}`);
+      // Launch the private project
+    } else {
+      alert("lol");
+      // Show an error message
+    }
+  };
+
+  const privateCases = cases.filter((cc) => cc.private);
+
   return (
     <div className="">
       <Helmet>
@@ -95,75 +126,282 @@ export default function Project({ cases }) {
           <span className="text-gray-500">Tales of Delightful Design</span>
         </div>
         <div class="text-left bg-white p-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-5">
+          
+        {cases
+  .filter((study) => study.featured)
+  .map((study) => {
+    return (
+      <a class="flex justify-center project" key={study.id}>
+      {/* {{id1: study.id}} */}
+      <div class="block rounded-sm shadow-md bg-white max-w-lg item-center text hover:bg-gray-0 dark:hover:bg-gray-700 cursor-pointer">
+        <div class="flex justify-between px-4 pt-4 bg-ray-100 relative">
+          <Link
+            to={!study.private ? `/case-study/${study.slug}` : ""}
+            onClick={() => {
+              if (study.private) {
+                handleModalOpen();
+              }
+            }}
+          >
+            <h5 className="py-3 px-3 uppercase text-xl font-semibold text-gray-700 dark:text-white">
+              {study.title}
+            </h5>
+          </Link>
+
+          <button
+            id={study.slug}
+            data-dropdown-toggle="dropdownHover"
+            data-dropdown-trigger="hover"
+            className="inline-block drop-btn outline-none text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-1.5"
+            type="button"
+            onClick={getDropdownIds(event, study.slug)}
+          >
+            <span class="sr-only">Open dropdown</span>
+            <svg
+              class="w-6 h-6"
+              aria-hidden="true"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z"></path>
+            </svg>
+          </button>
+
+          <div
+            id={study.id}
+            className={`z-10 w-44 dropdown dropdow bg-white rounded divide-y divide-gray-100 shadow right-14 absolute ${
+              isOpen ? "block" : "hidden"
+            }`}
+          >
+            <ul class="py-2" aria-labelledby={study.id}>
+              <li>
+                <a
+                  onClick={shareOnTwitter}
+                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                >
+                  Share on Twitter
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  onClick={shareOnLinkedIn}
+                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white "
+                >
+                  Share on LinkedIn
+                </a>
+              </li>
+              <li>
+                <a
+                  onClick={handleDropDown}
+                  className="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                >
+                  Close
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <Link
+          to={!study.private ? `/case-study/${study.slug}` : ""}
+          onClick={() => {
+            if (study.private) {
+              handleModalOpen();
+            }
+          }}
+        >
+          {" "}
+          <div>
+            <div class="px-6 pt-4 pb-0">
+              <span class="inline-block bg-gray-100 rounded-2 px-3 py-1 text-sm  text-gray-500 mr-2 mb-1">
+                <span>UI Design</span>
+              </span>
+              <span class="inline-block bg-gray-100 rounded-2 px-3 py-1 text-sm  text-gray-500 mr-2 mb-1">
+                <span>UX Design</span>
+              </span>
+              <span class="inline-block bg-gray-100 rounded-2 px-3 py-1 text-sm  text-gray-500 mr-2 mb-1">
+                <span>UX Research</span>
+              </span>
+            </div>
+          </div>
+          <div class="p-6">
+            <p class="text-gray-500 text-base mb-4">
+              {study.project_intro}
+            </p>
+            <div>
+              <span class="inline-block   text-sm  text-gray-800 mr-2 mb-1">
+                <span className="">CONTEXT: </span>{" "}
+                <span className="uppercase">{study.context}</span>
+              </span>
+            </div>
+          </div>
+          <div class="flex justify-between items-center  py-3 px-6 border-t border-gray-300 text-gray-600">
+            <p className="">{study.duration}</p>
+            <div class="flex items-center  justify-between  ">
+              <div
+                className="flex child rounded-2 px-4 py-2"
+                style={{
+                  opacity: "",
+                  transition: "opacity 0.3s",
+                  ":hover": {
+                    color: `${mainColor}`,
+                    backgroundColor: `${opacity1}`,
+                  },
+                }}
+              >
+                <p className="text-sm pr-2 my-1">View Case Study</p>
+                <svg
+                  class="w-4 h-4 dark:text-gray-500 group-hover:text-blue-600 dark:group-hover:text-blue-500"
+                  aria-hidden="true"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg"
+                  transform="rotate(45)"
+                >
+                  <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z"></path>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </Link>
+      </div>
+      <Modal isOpen={isModalOpen} onClose={handleModalClose}>
+        <h1 className="text-lg font-medium mb-4">
+          Enter PIN to Access Case Study
+        </h1>
+        <form
+          onSubmit={(event) => {
+            handleSubmit(event, study.pin, study.slug);
+          }}
+        >
+          <div class="mb-6">
+            <div class="mb-6">
+              <label
+                for="password"
+                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+              >
+                Password
+              </label>
+              <input
+                type="text"
+                onChange={handleInputChange}
+                id="password"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                placeholder="•••••••••"
+                required
+              />
+              {/* {study.pin != userInput ? <p>
+<p class="mt-2 none text-sm text-red-600 dark:text-red-500">
+<span class="font-medium">Oh, snapp!</span> Some error
+message.
+</p>
+</p> : <p>nikskskkn</p>} */}
+
+              {study.pin !== userInput && (
+                <p className="mt-2 text-sm text-red-600 dark:text-red-500">
+                  <span className="font-medium">Oh, snap!</span> The
+                  password is incorrect.
+                </p>
+              )}
+            </div>
+          </div>
+
+          <button
+            type="submit"
+            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+          >
+            Submit
+          </button>
+        </form>
+      </Modal>
+    </a>    );
+  })
+}
+          {/* {cases.map((study) => {
+            return (
+             
+            );
+          })} */}
+
           {cases.map((study) => {
             return (
-              <a class="flex justify-center project" key={study.id}>
-                {/* {{id1: study.id}} */}
-                <div class="block rounded-sm shadow-md bg-white max-w-lg item-center text hover:bg-gray-50 dark:hover:bg-gray-700 cursor-pointer">
-                  <div class="flex justify-between px-4 pt-4 bg-ray-100 relative">
-                    <Link to={`/case-study/${study.slug}`}>
-                      <h5 class="py-3 px-3 uppercase text-xl font-semibold text-gray-700 dark:text-white">
-                        {study.title}{" "}
-                      </h5>
-                    </Link>
-
-                    <button
-                      id={study.slug}
-                      data-dropdown-toggle="dropdownHover"
-                      data-dropdown-trigger="hover"
-                      className="inline-block drop-btn outline-none text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-1.5"
-                      type="button"
-                      onClick={getDropdownIds(event, study.slug)}
-                      // onClick={(e) => console.log(e.target.id)}
-                    >
-                      <span class="sr-only">Open dropdown</span>
-                      <svg
-                        class="w-6 h-6"
-                        aria-hidden="true"
-                        fill="currentColor"
-                        viewBox="0 0 20 20"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z"></path>
-                      </svg>
-                    </button>
-
-                    <div
-                      id={study.id}
-                      className={`z-10 w-44 dropdown dropdow bg-white rounded divide-y divide-gray-100 shadow right-14 absolute ${
-                        isOpen ? "block" : "hidden"
-                      }`}
-                    >
-                      <ul class="py-2" aria-labelledby={study.id}>
-                        <li>
-                          <a
-                            onClick={shareOnTwitter}
-                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                          >
-                            Share on Twitter
-                          </a>
-                        </li>
-                        <li>
-                          <a
-                            href="#"
-                            onClick={shareOnLinkedIn}
-                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white "
-                          >
-                            Share on LinkedIn
-                          </a>
-                        </li>
-                        <li>
-                          <a
-                            onClick={handleDropDown}
-                            className="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                          >
-                            Close
-                          </a>
-                        </li>
-                      </ul>
+              <div>
+                <div class="flex justify-center over">
+                  <div class="rounded-2 shadow-md bg-white project-progress hover:bg-gray-100 dark:hover:bg-gray-700 max-w-lg item-center overflow-hidden project">
+                    <div class="project-img relative">
+                      <div class="tag absolute top-2 right-2">
+                        <span class="inline-block bg-gray-100 rounded-2 px-3 py-1 text-sm text-gray-500 mr-2 mb-1">
+                          <span>Ongoing</span>
+                        </span>
+                      </div>
+                      <img
+                        class="w-full"
+                        src="https://static.wixstatic.com/media/72c0b2_02e6d0d2d2c8439a9e8793ad4d212832~mv2.png/v1/fill/w_586,h_391,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/72c0b2_02e6d0d2d2c8439a9e8793ad4d212832~mv2.png"
+                        alt="project-name"
+                      />
                     </div>
-                  </div>
-                  <Link to={`/case-study/${study.slug}`}>
+                    <div class="flex justify-between px-4 pt-4 bg-ray-100">
+                      <h5 class="py-3 px-3 text-xl font-bold text-gray-700 dark:text-white">
+                        On progress design
+                      </h5>
+
+                      <button
+                        id="dropdownButton"
+                        data-dropdown-toggle="dropdownHover"
+                        data-dropdown-trigger="hover"
+                        className="inline-block drop-btn outline-none text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-1.5"
+                        type="button"
+                        onClick={handleDropDown}
+                      >
+                        <span class="sr-only">Open dropdown</span>
+                        <svg
+                          class="w-6 h-6"
+                          aria-hidden="true"
+                          fill="currentColor"
+                          viewBox="0 0 20 20"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z"></path>
+                        </svg>
+                      </button>
+
+                      <div
+                        // id="dropdown"
+                        className={`z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow right-14 absolute ${
+                          isOpen ? "block" : "hidden"
+                        }`}
+                      >
+                        <ul class="py-2" aria-labelledby="dropdownButton">
+                          <li>
+                            <a
+                              onClick={shareOnTwitter}
+                              class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                            >
+                              Share on Twitter
+                            </a>
+                          </li>
+                          <li>
+                            <a
+                              href="#"
+                              onClick={shareOnLinkedIn}
+                              class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white "
+                            >
+                              Share on LinkedIn
+                            </a>
+                          </li>
+                          <li>
+                            <a
+                              onClick={handleDropDown}
+                              className="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                            >
+                              Close
+                            </a>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+
                     <div>
                       <div class="px-6 pt-4 pb-0">
                         <span class="inline-block bg-gray-100 rounded-2 px-3 py-1 text-sm  text-gray-500 mr-2 mb-1">
@@ -178,52 +416,81 @@ export default function Project({ cases }) {
                       </div>
                     </div>
                     <div class="p-6">
-                      <p class="text-gray-500 text-base mb-4">
-                        {study.project_intro}
+                      <p class="text-gray-500 text-base mb-2">
+                        Comming Soon!Stay tuned. come check next time
                       </p>
-                      <div>
-                        <span class="inline-block   text-sm  text-gray-800 mr-2 mb-1">
-                          <span className="">CONTEXT: </span>{" "}
-                          <span className="uppercase">{study.context}</span>
-                        </span>
-                      </div>
                     </div>
-                    <div class="flex justify-between items-center  py-3 px-6 border-t border-gray-300 text-gray-600">
-                      <p className="">{study.duration}</p>
-                      <div class="flex items-center  justify-between  ">
-                        <div
-                          className="flex child rounded-2 px-4 py-2"
-                          style={{
-                            opacity: "",
-                            transition: "opacity 0.3s",
-                            ":hover": {
-                              color: `${mainColor}`,
-                              backgroundColor: `${opacity1}`,
-                            },
-                          }}
-                        >
-                          <p className="text-sm pr-2 my-1">View Case Study</p>
-                          <svg
-                            class="w-4 h-4 dark:text-gray-500 group-hover:text-blue-600 dark:group-hover:text-blue-500"
-                            aria-hidden="true"
-                            fill="currentColor"
-                            viewBox="0 0 20 20"
-                            xmlns="http://www.w3.org/2000/svg"
-                            transform="rotate(45)"
+                    <div class=" justify-between pb-5 py-3 px-6 border-t border-gray-300 text-gray-600">
+                      {study.in_progress ? (
+                        <div>
+                          <div class="flex justify-between pro mb-1">
+                            <span
+                              class="gray-500 truncate dark:text-gray-400 dark:text-white"
+                              // style={{ color: `${mainColor}` }}
+                            >
+                              Research
+                            </span>
+                            <span
+                              class="gray-500 truncate dark:text-gray-400 dark:text-white"
+                              // style={{ color: `${mainColor}` }}
+                            >
+                              80%
+                            </span>
+                          </div>
+                          <div
+                            class="w-full bg-gray-100 rounded-sm h-2.0 dark:bg-gray-700"
+                            // style={{ backgroundColor: `${opacity1}` }}
                           >
-                            <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z"></path>
-                          </svg>
+                            <div
+                              class="bg-gray-400 h-2.5 pro-1 rounded-sm"
+                              style={{
+                                width: `80%`,
+                                // , backgroundColor: `${mainColor}`
+                              }}
+                            ></div>
+                          </div>
                         </div>
-                      </div>
+                      ) : (
+                        <div class="flex justify-between items-center   border-gray-300 text-gray-600">
+                          <p className="">{study.duration}</p>
+                          <div class="flex items-center  justify-between  ">
+                            <div
+                              className="flex child rounded-2 px-4 py-2"
+                              style={{
+                                opacity: "",
+                                transition: "opacity 0.3s",
+                                ":hover": {
+                                  color: `${mainColor}`,
+                                  backgroundColor: `${opacity1}`,
+                                },
+                              }}
+                            >
+                              <p className="text-sm pr-2 my-1">
+                                View Case Study
+                              </p>
+                              <svg
+                                class="w-4 h-4 dark:text-gray-500 group-hover:text-blue-600 dark:group-hover:text-blue-500"
+                                aria-hidden="true"
+                                fill="currentColor"
+                                viewBox="0 0 20 20"
+                                xmlns="http://www.w3.org/2000/svg"
+                                transform="rotate(45)"
+                              >
+                                <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z"></path>
+                              </svg>
+                            </div>
+                          </div>
+                        </div>
+                      )}
                     </div>
-                  </Link>
+                  </div>
                 </div>
-              </a>
+              </div>
             );
           })}
 
-          <div class="flex justify-center over">
-            <div class="rounded-2 shadow-md bg-white max-w-lg item-center overflow-hidden project">
+          {/* <div class="flex justify-center over">
+            <div class="rounded-2 shadow-md bg-white project-progress hover:bg-gray-100 dark:hover:bg-gray-700 max-w-lg item-center overflow-hidden project">
               <div class="project-img relative">
                 <div class="tag absolute top-2 right-2">
                   <span class="inline-block bg-gray-100 rounded-2 px-3 py-1 text-sm text-gray-500 mr-2 mb-1">
@@ -316,32 +583,45 @@ export default function Project({ cases }) {
                 </p>
               </div>
               <div class=" justify-between pb-5 py-3 px-6 border-t border-gray-300 text-gray-600">
-                <div class="flex justify-between mb-1">
-                  <span
-                    class="gray-500 truncate dark:text-gray-400 dark:text-white"
-                    style={{ color: `${mainColor}` }}
-                  >
-                    Research
-                  </span>
-                  <span
-                    class="gray-500 truncate dark:text-gray-400 dark:text-white"
-                    style={{ color: `${mainColor}` }}
-                  >
-                    80%
-                  </span>
-                </div>
-                <div
-                  class="w-full rounded-sm h-2.0 dark:bg-gray-700"
-                  style={{ backgroundColor: `${opacity1}` }}
-                >
+                <div>
+                  <div class="flex justify-between pro mb-1">
+                    <span
+                      class="gray-500 truncate dark:text-gray-400 dark:text-white"
+                      // style={{ color: `${mainColor}` }}
+                    >
+                      Research
+                    </span>
+                    <span
+                      class="gray-500 truncate dark:text-gray-400 dark:text-white"
+                      // style={{ color: `${mainColor}` }}
+                    >
+                      80%
+                    </span>
+                  </div>
                   <div
-                    class="bg-blue-600 h-2.5 rounded-sm"
-                    style={{ width: `80%`, backgroundColor: `${mainColor}` }}
-                  ></div>
+                    class="w-full bg-gray-100 rounded-sm h-2.0 dark:bg-gray-700"
+                    // style={{ backgroundColor: `${opacity1}` }}
+                  >
+                    <div
+                      class="bg-gray-400 h-2.5 pro-1 rounded-sm"
+                      style={{
+                        width: `80%`,
+                        // , backgroundColor: `${mainColor}`
+                      }}
+                    ></div>
+                  </div>
                 </div>
-              </div>
+
+                {/* {!study.in_progress ? (
+                      
+                    ) : (
+                      <button onClick={() => handleModalOpen()}>
+                        Open Modal
+                      </button>
+                    )} */}
+          {/* </div>
             </div>
-          </div>
+          </div> */}
 
           <div class="w-full max-w-lg bg-white border rounded-2 shadow dark:bg-gray-800 dark:border-gray-700">
             <div class="flex justify-between px-4 pt-4 bg-ray-100">

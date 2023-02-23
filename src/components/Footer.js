@@ -1,9 +1,9 @@
 import React from "react";
 
-export default function Footer() {
+export default function Footer({data}) {
   return (
     <div>
-      <footer class="p-4 bg-white rounded-lg shadow md:px-6 md:py-8 dark:bg-gray-900">
+      <footer class="py-4 px-20 bg-white rounded-lg shadow md:px-6 md:py-8 dark:bg-gray-900">
         <div class="sm:flex sm:items-center sm:justify-between">
           <a
             href="https://silikhe.com/"
