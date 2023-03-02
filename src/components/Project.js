@@ -127,202 +127,195 @@ export default function Project({ cases }) {
         </div>
         <div class="text-left bg-white p-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-5">
           
-        {cases
-  .filter((study) => study.featured)
-  .map((study) => {
-    return (
-      <a class="flex justify-center project" key={study.id}>
-      {/* {{id1: study.id}} */}
-      <div class="block rounded-sm shadow-md bg-white max-w-lg item-center text hover:bg-gray-0 dark:hover:bg-gray-700 cursor-pointer">
-        <div class="flex justify-between px-4 pt-4 bg-ray-100 relative">
-          <Link
-            to={!study.private ? `/case-study/${study.slug}` : ""}
-            onClick={() => {
-              if (study.private) {
-                handleModalOpen();
-              }
-            }}
-          >
-            <h5 className="py-3 px-3 uppercase text-xl font-semibold text-gray-700 dark:text-white">
-              {study.title}
-            </h5>
-          </Link>
-
-          <button
-            id={study.slug}
-            data-dropdown-toggle="dropdownHover"
-            data-dropdown-trigger="hover"
-            className="inline-block drop-btn outline-none text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-1.5"
-            type="button"
-            onClick={getDropdownIds(event, study.slug)}
-          >
-            <span class="sr-only">Open dropdown</span>
-            <svg
-              class="w-6 h-6"
-              aria-hidden="true"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z"></path>
-            </svg>
-          </button>
-
-          <div
-            id={study.id}
-            className={`z-10 w-44 dropdown dropdow bg-white rounded divide-y divide-gray-100 shadow right-14 absolute ${
-              isOpen ? "block" : "hidden"
-            }`}
-          >
-            <ul class="py-2" aria-labelledby={study.id}>
-              <li>
-                <a
-                  onClick={shareOnTwitter}
-                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                >
-                  Share on Twitter
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  onClick={shareOnLinkedIn}
-                  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white "
-                >
-                  Share on LinkedIn
-                </a>
-              </li>
-              <li>
-                <a
-                  onClick={handleDropDown}
-                  className="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                >
-                  Close
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <Link
-          to={!study.private ? `/case-study/${study.slug}` : ""}
-          onClick={() => {
-            if (study.private) {
-              handleModalOpen();
-            }
-          }}
-        >
-          {" "}
-          <div>
-            <div class="px-6 pt-4 pb-0">
-              <span class="inline-block bg-gray-100 rounded-2 px-3 py-1 text-sm  text-gray-500 mr-2 mb-1">
-                <span>UI Design</span>
-              </span>
-              <span class="inline-block bg-gray-100 rounded-2 px-3 py-1 text-sm  text-gray-500 mr-2 mb-1">
-                <span>UX Design</span>
-              </span>
-              <span class="inline-block bg-gray-100 rounded-2 px-3 py-1 text-sm  text-gray-500 mr-2 mb-1">
-                <span>UX Research</span>
-              </span>
-            </div>
-          </div>
-          <div class="p-6">
-            <p class="text-gray-500 text-base mb-4">
-              {study.project_intro}
-            </p>
-            <div>
-              <span class="inline-block   text-sm  text-gray-800 mr-2 mb-1">
-                <span className="">CONTEXT: </span>{" "}
-                <span className="uppercase">{study.context}</span>
-              </span>
-            </div>
-          </div>
-          <div class="flex justify-between items-center  py-3 px-6 border-t border-gray-300 text-gray-600">
-            <p className="">{study.duration}</p>
-            <div class="flex items-center  justify-between  ">
-              <div
-                className="flex child rounded-2 px-4 py-2"
-                style={{
-                  opacity: "",
-                  transition: "opacity 0.3s",
-                  ":hover": {
-                    color: `${mainColor}`,
-                    backgroundColor: `${opacity1}`,
-                  },
-                }}
-              >
-                <p className="text-sm pr-2 my-1">View Case Study</p>
-                <svg
-                  class="w-4 h-4 dark:text-gray-500 group-hover:text-blue-600 dark:group-hover:text-blue-500"
-                  aria-hidden="true"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                  xmlns="http://www.w3.org/2000/svg"
-                  transform="rotate(45)"
-                >
-                  <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z"></path>
-                </svg>
-              </div>
-            </div>
-          </div>
-        </Link>
-      </div>
-      <Modal isOpen={isModalOpen} onClose={handleModalClose}>
-        <h1 className="text-lg font-medium mb-4">
-          Enter PIN to Access Case Study
-        </h1>
-        <form
-          onSubmit={(event) => {
-            handleSubmit(event, study.pin, study.slug);
-          }}
-        >
-          <div class="mb-6">
-            <div class="mb-6">
-              <label
-                for="password"
-                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-              >
-                Password
-              </label>
-              <input
-                type="text"
-                onChange={handleInputChange}
-                id="password"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                placeholder="•••••••••"
-                required
-              />
-              {/* {study.pin != userInput ? <p>
-<p class="mt-2 none text-sm text-red-600 dark:text-red-500">
-<span class="font-medium">Oh, snapp!</span> Some error
-message.
-</p>
-</p> : <p>nikskskkn</p>} */}
-
-              {study.pin !== userInput && (
-                <p className="mt-2 text-sm text-red-600 dark:text-red-500">
-                  <span className="font-medium">Oh, snap!</span> The
-                  password is incorrect.
-                </p>
-              )}
-            </div>
-          </div>
-
-          <button
-            type="submit"
-            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-          >
-            Submit
-          </button>
-        </form>
-      </Modal>
-    </a>    );
-  })
-}
-          {/* {cases.map((study) => {
+          {cases.map((study) => {
             return (
-             
+              <a class="flex justify-center project" key={study.id}>
+                {/* {{id1: study.id}} */}
+                <div class="block rounded-sm shadow-md bg-white max-w-lg item-center text hover:bg-gray-0 dark:hover:bg-gray-700 cursor-pointer">
+                  <div class="flex justify-between px-4 pt-4 bg-ray-100 relative">
+                    <Link
+                      to={!study.private ? `/case-study/${study.slug}` : ""}
+                      onClick={() => {
+                        if (study.private) {
+                          handleModalOpen();
+                        }
+                      }}
+                    >
+                      <h5 className="py-3 px-3 uppercase text-xl font-semibold text-gray-700 dark:text-white">
+                        {study.title}
+                      </h5>
+                    </Link>
+
+                    <button
+                      id={study.slug}
+                      data-dropdown-toggle="dropdownHover"
+                      data-dropdown-trigger="hover"
+                      className="inline-block drop-btn outline-none text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-1.5"
+                      type="button"
+                      onClick={getDropdownIds(event, study.slug)}
+                    >
+                      <span class="sr-only">Open dropdown</span>
+                      <svg
+                        class="w-6 h-6"
+                        aria-hidden="true"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z"></path>
+                      </svg>
+                    </button>
+
+                    <div
+                      id={study.id}
+                      className={`z-10 w-44 dropdown dropdow bg-white rounded divide-y divide-gray-100 shadow right-14 absolute ${
+                        isOpen ? "block" : "hidden"
+                      }`}
+                    >
+                      <ul class="py-2" aria-labelledby={study.id}>
+                        <li>
+                          <a
+                            onClick={shareOnTwitter}
+                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                          >
+                            Share on Twitter
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            href="#"
+                            onClick={shareOnLinkedIn}
+                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white "
+                          >
+                            Share on LinkedIn
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            onClick={handleDropDown}
+                            className="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                          >
+                            Close
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  <Link
+                    to={!study.private ? `/case-study/${study.slug}` : ""}
+                    onClick={() => {
+                      if (study.private) {
+                        handleModalOpen();
+                      }
+                    }}
+                  >
+                    {" "}
+                    <div>
+                      <div class="px-6 pt-4 pb-0">
+                        <span class="inline-block bg-gray-100 rounded-2 px-3 py-1 text-sm  text-gray-500 mr-2 mb-1">
+                          <span>UI Design</span>
+                        </span>
+                        <span class="inline-block bg-gray-100 rounded-2 px-3 py-1 text-sm  text-gray-500 mr-2 mb-1">
+                          <span>UX Design</span>
+                        </span>
+                        <span class="inline-block bg-gray-100 rounded-2 px-3 py-1 text-sm  text-gray-500 mr-2 mb-1">
+                          <span>UX Research</span>
+                        </span>
+                      </div>
+                    </div>
+                    <div class="p-6">
+                      <p class="text-gray-500 text-base mb-4">
+                        {study.project_intro}
+                      </p>
+                      <div>
+                        <span class="inline-block   text-sm  text-gray-800 mr-2 mb-1">
+                          <span className="">CONTEXT: </span>{" "}
+                          <span className="uppercase">{study.context}</span>
+                        </span>
+                      </div>
+                    </div>
+                    <div class="flex justify-between items-center  py-3 px-6 border-t border-gray-300 text-gray-600">
+                      <p className="">{study.duration}</p>
+                      <div class="flex items-center  justify-between  ">
+                        <div
+                          className="flex child rounded-2 px-4 py-2"
+                          style={{
+                            opacity: "",
+                            transition: "opacity 0.3s",
+                            ":hover": {
+                              color: `${mainColor}`,
+                              backgroundColor: `${opacity1}`,
+                            },
+                          }}
+                        >
+                          <p className="text-sm pr-2 my-1">View Case Study</p>
+                          <svg
+                            class="w-4 h-4 dark:text-gray-500 group-hover:text-blue-600 dark:group-hover:text-blue-500"
+                            aria-hidden="true"
+                            fill="currentColor"
+                            viewBox="0 0 20 20"
+                            xmlns="http://www.w3.org/2000/svg"
+                            transform="rotate(45)"
+                          >
+                            <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z"></path>
+                          </svg>
+                        </div>
+                      </div>
+                    </div>
+                  </Link>
+                </div>
+                <Modal isOpen={isModalOpen} onClose={handleModalClose}>
+                  <h1 className="text-lg font-medium mb-4">
+                    Enter PIN to Access Case Study
+                  </h1>
+                  <form
+                    onSubmit={(event) => {
+                      handleSubmit(event, study.pin, study.slug);
+                    }}
+                  >
+                    <div class="mb-6">
+                      <div class="mb-6">
+                        <label
+                          for="password"
+                          class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                        >
+                          Password
+                        </label>
+                        <input
+                          type="text"
+                          onChange={handleInputChange}
+                          id="password"
+                          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                          placeholder="•••••••••"
+                          required
+                        />
+                        {/* {study.pin != userInput ? <p>
+          <p class="mt-2 none text-sm text-red-600 dark:text-red-500">
+          <span class="font-medium">Oh, snapp!</span> Some error
+          message.
+        </p>
+        </p> : <p>nikskskkn</p>} */}
+
+                        {study.pin !== userInput && (
+                          <p className="mt-2 text-sm text-red-600 dark:text-red-500">
+                            <span className="font-medium">Oh, snap!</span> The
+                            password is incorrect.
+                          </p>
+                        )}
+                      </div>
+                    </div>
+
+                    <button
+                      type="submit"
+                      class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                    >
+                      Submit
+                    </button>
+                  </form>
+                </Modal>
+              </a>
             );
-          })} */}
+          })}
 
           {cases.map((study) => {
             return (

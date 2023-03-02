@@ -262,7 +262,7 @@ export default function Article() {
             </div>
             <div class="article-img">
               <a href="#">
-                <img class="rounded-t-" src="./images/saf.jpg" alt="" />
+                <img class="rounded-t-" src="https://files.slack.com/files-pri/TBY6RUXV3-F04CTM8GAER/img-20221129-wa0003.jpg" alt="" />
               </a>
             </div>
             <div class="p-5 article-content ">

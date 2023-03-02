@@ -4,7 +4,7 @@ export default function Hero() {
   return (
     <div>
       <div className="sec text-center my-5 flex flex-col justify-center items-center">
-        <h1 className="mb-4 font-bold leading-none tracking-tight text-gray-900 md:text-3xl lg:text-4xl dark:text-white">
+        <h1 className="mb-4 font-bold leading-none tracking-tight text-gray-900 md:text-3xl lg:text-4xl sm:text-4xl dark:text-white">
           Pixel Perfect, User-Centric Design Maverick!{" "}
         </h1>
         <p className="mb-4  font-normal text-gray-500 lg:text-lg sm:px-14 xl:px-44 dark:text-gray-400 pt-4 pb-4 sm: p-5">
