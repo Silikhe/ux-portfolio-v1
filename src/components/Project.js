@@ -126,7 +126,6 @@ export default function Project({ cases }) {
           <span className="text-gray-500">Tales of Delightful Design</span>
         </div>
         <div class="text-left bg-white p-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-5">
-          
           {cases.map((study) => {
             return (
               <a class="flex justify-center project" key={study.id}>
@@ -235,7 +234,7 @@ export default function Project({ cases }) {
                       </div>
                     </div>
                     <div class="flex justify-between items-center  py-3 px-6 border-t border-gray-300 text-gray-600">
-                      <p className="">{study.duration}</p>
+                      <p className="text-sm">{study.duration}</p>
                       <div class="flex items-center  justify-between  ">
                         <div
                           className="flex child rounded-2 px-4 py-2"
@@ -445,7 +444,7 @@ export default function Project({ cases }) {
                         </div>
                       ) : (
                         <div class="flex justify-between items-center   border-gray-300 text-gray-600">
-                          <p className="">{study.duration}</p>
+                          <p className="text-sm">{study.duration}</p>
                           <div class="flex items-center  justify-between  ">
                             <div
                               className="flex child rounded-2 px-4 py-2"

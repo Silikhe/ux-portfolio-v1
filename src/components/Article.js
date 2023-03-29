@@ -247,10 +247,10 @@ export default function Article() {
                 </div> */}
                     <div class="flex-1 min-w-0">
                       <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
-                        Koding Kahawa
+                        Safaricom PLC
                       </p>
                       <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-                        @KodingKahawa
+                        @safaricom
                       </p>
                     </div>
                     {/* <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
@@ -262,7 +262,7 @@ export default function Article() {
             </div>
             <div class="article-img">
               <a href="#">
-                <img class="rounded-t-" src="https://files.slack.com/files-pri/TBY6RUXV3-F04CTM8GAER/img-20221129-wa0003.jpg" alt="" />
+                <img class="rounded-t- object-center" src="https://github.com/Silikhe/ux-portfolio-v1/blob/master/src/images/saf.jpg?raw=true" alt="" />
               </a>
             </div>
             <div class="p-5 article-content ">

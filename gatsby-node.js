@@ -33,7 +33,7 @@ const params = () => qs.stringify(
 
 const ID = 3;
 const CONTENT_TYPE = "cases"
-const BASE_URL = `http://localhost:1338/api/${CONTENT_TYPE}/${ID}?`
+const BASE_URL = `http://localhost:1338/api/${CONTENT_TYPE}/${ID}?populate=*`
 
 
 const QUERY_1 = BASE_URL + params();
