@@ -705,6 +705,30 @@ export const query = graphql`
       project_intro
       pre_preview
       post_preview
+      contribution {
+        id
+      }
+      contributors {
+        number_of_contributors
+        id
+        type_of_contributor
+      }
+      links {
+        id
+        link_holder
+        link_type
+        url
+      }
+      project_cover {
+        url
+      }
+      project_logo {
+        url
+      }
+      tools_used {
+        tool_name
+        id
+      }
     }
     allCases: allStrapiCase(sort: { fields: strapi_id, order: ASC }) {
       nodes {
