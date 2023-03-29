@@ -62,14 +62,12 @@ export default function CaseStudy({ data }) {
   const nextCaseIndex = (currentCaseIndex + 1) % allCases.length; // wrap around if last case
   const nextCase = allCases[nextCaseIndex];
 
-  let mainColor = ""
+  let mainColor = "";
   console.log(currentCase.theme);
-  if(!currentCase.theme){
-     mainColor = "#e12324";
-
-  }else{
+  if (!currentCase.theme) {
+    mainColor = "#e12324";
+  } else {
     mainColor = currentCase.theme;
-
   }
   let opacity1 = hexToRgba(mainColor, 0.1);
   let opacity5 = hexToRgba(mainColor, 0.5);
@@ -225,19 +223,21 @@ export default function CaseStudy({ data }) {
               </p>
             </div>
             <div class="col-span-1">
-              <div class=" justify-between pb-4 py-2 px-4 text-gray-600">
+            {caseData.contribution.map((item, index) => {
+              return (
+                <div class=" justify-between pb-4 py-2 px-4 text-gray-600" key={index}>
                 <div class="flex justify-between mb-1">
                   <span
                     class="gray-500 truncate dark:text-gray-400 dark:text-white"
                     style={{ color: `${mainColor}` }}
                   >
-                    Research
+                    {item.contribution_type}
                   </span>
                   <span
                     class="gray-500 truncate dark:text-gray-400 dark:text-white"
                     style={{ color: `${mainColor}` }}
                   >
-                    80%
+                    { item.percent}%
                   </span>
                 </div>
                 <div
@@ -246,10 +246,13 @@ export default function CaseStudy({ data }) {
                 >
                   <div
                     class="bg-blue-600 h-2.5 rounded-sm"
-                    style={{ width: `80%`, backgroundColor: `${mainColor}` }}
+                    style={{ width: `${item.percent}%`, backgroundColor: `${mainColor}` }}
                   ></div>
                 </div>
               </div>
+              );
+            })}
+              
             </div>
           </div>
           <div className="company mx-7 mb-5">
@@ -287,45 +290,48 @@ export default function CaseStudy({ data }) {
                     />
                   </div>
 
-                  <div className="my-3">
-                    <p
-                      className="text-sm text-bold text-gray-900 "
-                      style={{ color: `${mainColor}` }}
-                    >
-                      iTuneStores
-                    </p>
-                    <a className="text-sm  text-gray-900  mb-1 underline">
-                      Douwnload application
-                    </a>
-                  </div>
-                  <div className="my-3">
-                    <p
-                      className="text-sm text-bold text-gray-900 "
-                      style={{ color: `${mainColor}` }}
-                    >
-                      iTuneStores
-                    </p>
-                    <a className="text-sm  text-gray-900  mb-1 underline">
-                      Douwnload application
-                    </a>
-                  </div>
-                  <div className="my-3">
-                    <p
-                      className="text-sm text-bold text-gray-900 "
-                      style={{ color: `${mainColor}` }}
-                    >
-                      iTuneStores
-                    </p>
-                    <a className="text-sm  text-gray-900  mb-1 underline">
-                      Douwnload application
-                    </a>
-                  </div>
+                  {caseData.links.map((item, index) => {
+                    return (
+                      <div className="my-3" key={index}>
+                        <p
+                          className="text-sm text-bold text-gray-900 "
+                          style={{ color: `${mainColor}` }}
+                        >
+                          {item.link_type}
+                        </p>
+                        <a
+                          href={item.url}
+                          target="_blank"
+                          className="text-sm  text-gray-900  mb-1 underline"
+                        >
+                          {item.link_holder}
+                        </a>
+                      </div>
+                    );
+                  })}
                 </div>
                 <div class="hidden md:block my-5">
                   <h5 className=" text-xl mb-2 text-semibold sm:text-sm">
                     Tools Used
                   </h5>{" "}
                   <div class="flex flex-row items-center flex-wrap ">
+                  {caseData.tools_used.map((item, index) => {
+                    console.log(item)
+                    return (
+                      <div class="mr-3 text-center flex-shrink-0 mb-1">
+                      <img
+                        class="w-12 p-2 h-12 mb-1 shadow-sm object-cover"
+                        src="https://github.com/Silikhe/ux-portfolio-v1/blob/master/src/images/alt_tools_icon.png"
+                        alt="Silikhe image"
+                        style={{
+                          color: `${mainColor}`,
+                          backgroundColor: `${opacity1}`,
+                        }}
+                      />
+                      <h5 className="text-sm mb-1 text-gray-600">{item.tool_name}</h5>
+                    </div>
+                    );
+                  })}
                     <div class="mr-3 text-center flex-shrink-0 mb-1">
                       <img
                         class="w-12 p-2 h-12 mb-1 shadow-sm object-cover"
@@ -356,28 +362,20 @@ export default function CaseStudy({ data }) {
             </div>
           </div>
           <div class="flex justify-around m-7 my-7  pb-8  border-b border-gray-300">
-            <div class="flex text-center items-center   mr-4">
-              <div className="justify-center text-center w-full items-center">
-                <h1 className="text-bold text-gray-800 text-5xl">1</h1>
-                <h5 className="text-nomarl mb-1 text-gray-600">
-                  Product Manager
-                </h5>
-              </div>
-            </div>
-            <div class="flex text-center items-center   mr-4">
-              <div className="justify-center items-center">
-                <h1 className="text-bold text-gray-800 text-5xl">1</h1>
-                <h5 className="text-sm mb-1 text-gray-600">Product Designer</h5>
-              </div>
-            </div>
-            <div class="flex text-center items-center   mr-4">
-              <div className="justify-center items-center">
-                <h1 className="text-bold text-gray-800 text-5xl">4</h1>
-                <h5 className="text-sm mb-1 text-gray-600">
-                  Software Developer
-                </h5>
-              </div>
-            </div>
+            {caseData.contributors.map((item, index) => {
+              return (
+                <div class="flex text-center items-center   mr-4" key={index}>
+                  <div className="justify-center text-center w-full items-center">
+                    <h1 className="text-bold text-gray-800 text-5xl">
+                      {item.number_of_contributors}
+                    </h1>
+                    <h5 className="text-nomarl mb-1 text-gray-600">
+                      {item.type_of_contributor}
+                    </h5>
+                  </div>
+                </div>
+              );
+            })}
           </div>
 
           <div
@@ -706,15 +704,16 @@ export const query = graphql`
       pre_preview
       post_preview
       contribution {
-        id
+        contribution_type
+        percent
       }
       contributors {
         number_of_contributors
-        id
+        strapi_id
         type_of_contributor
       }
       links {
-        id
+        strapi_id
         link_holder
         link_type
         url
@@ -727,7 +726,7 @@ export const query = graphql`
       }
       tools_used {
         tool_name
-        id
+        strapi_id
       }
     }
     allCases: allStrapiCase(sort: { fields: strapi_id, order: ASC }) {
